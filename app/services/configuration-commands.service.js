@@ -11,8 +11,8 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
     }, {});
   }
   /**
-   * @typedef {string} endpoint
-   * @return {{endpoint: {[values]: string[], [arrays]: string[]}}}
+   * @typedef {string} cluster
+   * @return {{cluster: {[values]: string[], [arrays]: string[]}}}
    */
   var serverCommands = function () {
     return {
@@ -274,8 +274,8 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
     ]
   }
 
-  this.serverCommand = function (endpoint) {
-    return serverCommands()[endpoint] ?? {};
+  this.serverCommand = function (cluster) {
+    return serverCommands()[cluster] ?? {};
   }
   const commandConverter = (data) => ({
     type: {

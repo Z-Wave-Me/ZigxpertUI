@@ -29,7 +29,7 @@ appController.controller('ConfigHealthController', function ($scope, $routeParam
       node: {},
       find: {},
       hasPowerLevel: false,
-      endpoint: false
+      cluster: false
     },
     cmd: {
       testNodeInstance: 0
@@ -128,11 +128,11 @@ appController.controller('ConfigHealthController', function ($scope, $routeParam
     $scope.handleModal(name, event);
     $scope.health.device.find = device;
     if (!device) {
-      $scope.health.device.endpoint = {};
+      $scope.health.device.cluster = {};
       return;
     }
     var cc = deviceService.configGetCommandClass($scope.health.device.hasPowerLevel[device.id], '/', '');
-    $scope.health.device.endpoint = deviceService.configSetCommandClass(cc);
+    $scope.health.device.cluster = deviceService.configSetCommandClass(cc);
   };
 
   // Handle timing modal window

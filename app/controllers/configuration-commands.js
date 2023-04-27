@@ -71,11 +71,11 @@ appController.controller('ConfigCommandsController', function ($scope, $routePar
      */
     $scope.handleCmdClassModal = function (target, $event, endpointId, ccId, type) {
         if (type === 'endpoint') {
-            $scope.endpoint = deviceService.configGetCommandClass(
+            $scope.cluster = deviceService.configGetCommandClass(
               dataHolderService.getRealNodeById($routeParams.nodeId).endpoints[endpointId].data, '/', '');
         }
-        if (type === 'endpoint') {
-            $scope.endpoint = deviceService.configGetCommandClass(
+        if (type === 'cluster') {
+            $scope.cluster = deviceService.configGetCommandClass(
               dataHolderService.getRealNodeById($routeParams.nodeId).endpoints[endpointId].clusters[ccId].data, '/', '');
         }
         $scope.handleModal(target, $event);

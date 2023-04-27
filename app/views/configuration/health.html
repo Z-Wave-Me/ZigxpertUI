@@ -163,7 +163,7 @@
                         class="fa fa-times"></i></span>
                         <h3>{{health.device.find.name|cutText:true:30}}</h3>
                     </div>
-                    <div class="appmodal-body" ng-bind-html="health.device.endpoint | toTrusted">
+                    <div class="appmodal-body" ng-bind-html="health.device.cluster | toTrusted">
                     </div>
                     <div class="appmodal-footer">
                         <!-- Close -->

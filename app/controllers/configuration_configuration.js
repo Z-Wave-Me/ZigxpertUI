@@ -516,7 +516,7 @@ appController.controller('ConfigConfigurationController', function ($scope, $rou
           }
         });
     }
-    function configurationCc(endpoint, endpointId,nodeId, ZigbeeAPIData) {
+    function configurationCc(cluster, endpointId,nodeId, ZigbeeAPIData) {
         var ccId = 112;
         var methods = getMethodSpec(ZigbeeAPIData, nodeId, endpointId, ccId, null);
         var command = deviceService.configGetCommands(methods, ZigbeeAPIData);
@@ -528,7 +528,7 @@ appController.controller('ConfigConfigurationController', function ($scope, $rou
         obj['cmd'] = 'devices[' + nodeId + '].endpoints[' + endpointId + '].clusters[' + ccId + ']';
         obj['cmdData'] = ZigbeeAPIData.devices[nodeId].endpoints[endpointId].clusters[ccId].data;
         obj['cmdDataIn'] = ZigbeeAPIData.devices[nodeId].endpoints[endpointId].data;
-        obj['endpoint'] = endpoint.name;
+        obj['cluster'] = cluster.name;
         obj['command'] = command;
         obj['updateTime'] = ZigbeeAPIData.updateTime;
         return obj;

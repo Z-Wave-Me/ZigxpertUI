@@ -578,8 +578,8 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
     /**
      * Get xml config param
      */
-    this.getCfgXmlParam = function (cfgXml, nodeId, endpoint, endpoint, command) {
-        return getCfgXmlParam(cfgXml, nodeId, endpoint, endpoint, command);
+    this.getCfgXmlParam = function (cfgXml, nodeId, endpoint, cluster, command) {
+        return getCfgXmlParam(cfgXml, nodeId, endpoint, cluster, command);
     };
 
     /**
@@ -592,8 +592,8 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
     /**
      * Get assoc xml config param
      */
-    this.getCfgXmlAssoc = function (cfgXml, nodeId, endpoint, endpoint, command, groupId) {
-        return getCfgXmlAssoc(cfgXml, nodeId, endpoint, endpoint, command, groupId);
+    this.getCfgXmlAssoc = function (cfgXml, nodeId, endpoint, cluster, command, groupId) {
+        return getCfgXmlAssoc(cfgXml, nodeId, endpoint, cluster, command, groupId);
     };
 
 
@@ -1340,12 +1340,12 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
     /**
      * Get xml config param
      */
-    function getCfgXmlParam(cfgXml, nodeId, endpoint, endpoint, command) {
+    function getCfgXmlParam(cfgXml, nodeId, endpoint, cluster, command) {
         //console.log(cfgXml)
         var collection = [];
         var cfg = $filter('hasNode')(cfgXml, 'config.devices.deviceconfiguration');
-        var parseParam = function (v, nodeId, endpoint, endpoint, command) {
-            if (v['_id'] == nodeId && v['_endpoint'] == endpoint && v['_cluster'] == endpoint && v['_command'] == command) {
+        var parseParam = function (v, nodeId, endpoint, cluster, command) {
+            if (v['_id'] == nodeId && v['_endpoint'] == endpoint && v['_cluster'] == cluster && v['_command'] == command) {
 
                 var array = JSON.parse(v['_parameter']);
                 if (array.length > 2) {
@@ -1365,11 +1365,11 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
         // Get data for given device by id
         if (_.isArray(cfg)) {
             angular.forEach(cfg, function (v, k) {
-                parseParam(v, nodeId, endpoint, endpoint, command);
+                parseParam(v, nodeId, endpoint, cluster, command);
 
             });
         } else {
-            parseParam(cfg, nodeId, endpoint, endpoint, command);
+            parseParam(cfg, nodeId, endpoint, cluster, command);
         }
 
         return collection;
@@ -1418,7 +1418,7 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
     /**
      * Get assoc xml config param
      */
-    function getCfgXmlAssoc(cfgXml, nodeId, endpoint, endpoint, command, groupId) {
+    function getCfgXmlAssoc(cfgXml, nodeId, endpoint, cluster, command, groupId) {
         var cfg = $filter('hasNode')(cfgXml, 'config.devices.deviceconfiguration');
         if (!cfg) {
             return [];
@@ -1430,7 +1430,7 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
             nodeInstances: []
         };
         if (!(_.isArray(cfg))) {
-            if (cfg['_id'] == nodeId && cfg['_endpoint'] == endpoint && cfg['_cluster'] == endpoint && cfg['_command'] == command) {
+            if (cfg['_id'] == nodeId && cfg['_endpoint'] == endpoint && cfg['_cluster'] == cluster && cfg['_command'] == command) {
 
                 var obj = {};
                 var array = JSON.parse(cfg['_parameter']);
@@ -1455,7 +1455,7 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
             }
         } else {
             angular.forEach(cfg, function (v, k) {
-                if (v['_id'] == nodeId && v['_endpoint'] == endpoint && v['_cluster'] == endpoint && v['_command'] == command) {
+                if (v['_id'] == nodeId && v['_endpoint'] == endpoint && v['_cluster'] == cluster && v['_command'] == command) {
                     var obj = {};
                     var array = JSON.parse(v['_parameter']);
                     if (array.length == 2) {

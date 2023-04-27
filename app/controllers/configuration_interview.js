@@ -146,7 +146,7 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
     }
     var cc = deviceService.configGetCommandClass(ccData, '/', '');
 
-    $scope.endpoint = deviceService.configSetCommandClass(cc);
+    $scope.cluster = deviceService.configSetCommandClass(cc);
     $scope.handleModal(target, $event);
     //$(target).modal();
   };
