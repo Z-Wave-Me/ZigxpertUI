@@ -1,0 +1,36 @@
+/* Accordion
+-------------------------------------------------- */
+.accordion-entry{
+    margin-bottom: $spacing;
+    border-top: dotted 1px $accordion-border-color;
+    //color: $accordion-color;
+}
+.accordion-entry-title{
+    font-size: $accordion-heading-font-size; 
+    position: relative;
+    vertical-align: middle;
+    margin: $spacing 0;
+    color: $accordion-heading-color;
+    cursor: pointer;
+    .fa{
+        color: $accordion-icon-color;    
+        padding-right: $spacing;
+             font-size: $accordion-icon-size;  
+        }
+    .accordion-arrow{
+        position: absolute;
+        right: 1%;
+        display: inline-block;
+        padding:0;
+    }
+    &.expanded-only{
+        cursor: text;
+    }
+}
+.command-arrow {
+    transform: rotate3d(1,0,0, 0deg);
+    transition: .6s;
+    &.rotated {
+        transform: rotate3d(1,0,0, 180deg);
+    }
+}

@@ -1,0 +1,48 @@
+<!-- loadXmlModal -->
+<div id="loadXmlModa" class="appmodal" ng-if="modalArr.loadXmlModal">
+    <div class="appmodal-in" ng-controller="LoadDeviceXmlController">
+        <div class="appmodal-header">
+                <span class="appmodal-close" ng-click="handleModal('loadXmlModal', $event)"><i
+                        class="fa fa-times"></i></span>
+            <h3>{{_t('config_ui_select_xml')}}</h3>
+        </div>
+        <div class="appmodal-body modal-h-600">
+            <p ng-bind-html="_t('select_zddx_help') | toTrusted"></p>
+            <select id="select_zddx_help" class="form-control"
+                    ng-change="changeDeviceXml(deviceXml.input)"
+                    ng-model="deviceXml.input.fileName">
+                <option value="">---</option>
+                <option ng-init="selectCfg = {
+                                'name':((v.brandName == '' && v.productName == '')?('Unnamed ZDDX: ' + v.fileName):(v.productCode + ' - ' + v.brandName + ' ' + v.productName + ' ( RF: ' + v.rfFrequency + ')'))}"
+                        ng-repeat="v in deviceXml.all | orderBy:'brandName':false track by $index"
+                        ng-selected="deviceZddxFile == v.fileName || v == deviceXml.filter" 
+                        value="{{v.fileName}}">{{selectCfg.name}}
+                </option>
+            </select>
+            <div id="device_select_image_container" ng-if="!_.isEmpty(deviceXml.find) && deviceXml.find.deviceImage">
+                <div id="device_select_image">
+                    <img ng-src="{{deviceXml.find.deviceImage}}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="appmodal-footer">
+            <!-- Close -->
+            <button type="button" class="btn btn-default" ng-click="handleModal('loadXmlModal', $event)">
+                <i class="fa fa-times text-danger"></i> <span class="btn-name">{{_t('btn_cancel')}}</span>
+            </button>
+            <!-- Select -->
+            <button class="btn btn-primary"
+                    ng-if="!_.isEmpty(deviceXml.find)"
+                    ng-click="storeDeviceXml(deviceXml.input,'storeDeviceXml')"
+                    ng-disabled="rowSpinner['storeDeviceXml']">
+
+                <bb-row-spinner
+                        spinner="rowSpinner['storeDeviceXml']"
+                        label="_t('btn_save')"
+                        icon="'fa-circle'">
+                </bb-row-spinner>
+            </button>
+        </div>
+    </div>
+</div>

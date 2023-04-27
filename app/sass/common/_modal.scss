@@ -1,0 +1,124 @@
+/* Modal from the bootstrap - will be removed
+-------------------------------------------------- */
+.modal {
+  z-index: $zindex-modal;
+}
+/* Modal
+-------------------------------------------------- */
+.appmodal { 
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-modal;
+     overflow: show;
+     color: $modal-color;
+    .appmodal-in{
+        width: $modal-w;
+        position: relative;
+        margin: $modal-margin;
+       background-color: $modal-bcg-color;
+    }
+}
+.appmodal-100 { 
+    .appmodal-in{
+        width: $modal-full-w !important;
+    }
+}
+.appmodal-90 { 
+    .appmodal-in{
+        width: 90%;
+    }
+}
+#modalHistory{
+    z-index: $zindex-modal + 1;
+}
+
+.appmodal:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $app-overlay-bcg-color;
+}
+.appmodal-header,.appmodal-body,.appmodal-footer{
+    padding: 10px 15px;
+}
+
+.appmodal-header{
+   border-bottom: solid 1px $modal-border-color;
+  .appmodal-close{
+        color: $modal-icon-color;
+        font-size: $modal-close-size;
+        display: block;
+        text-decoration: none;
+        position: absolute; 
+        right: $spacing; 
+        top:  0;
+        z-index: 2;
+        cursor: pointer;
+        span{
+            display: inline-block;
+        }
+    }
+    h3{
+        font-size: $modal-heading-font-size;
+        margin: 0;
+        color: $modal-heading-color;
+    }
+}
+
+.appmodal-body{}
+.security-modal {
+  display: flex;
+  .security-button {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    & > button {
+      align-self: center;
+    }
+  }
+}
+
+.appmodal-footer{
+  border-top: solid 1px $modal-border-color;  
+  text-align: right;
+}
+
+/* Modal with 400 px h
+-------------------------------------------------- */
+.modal-h-400{
+  max-height: 400px;
+  overflow: auto;
+}
+/* Modal with 600 px h
+-------------------------------------------------- */
+.modal-h-600{
+  max-height: 600px;
+  overflow: auto;
+}
+
+/* Modals - old bootstrap modal - will be removed
+-------------------------------------------------- */
+.modal-body {
+  padding: 10px 10px 0 10px;
+}
+.cc-data-element{
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap; /* HP printers */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+  word-break: break-all;
+}
+#modal_queue .modal-dialog {
+  width: 60%;
+}

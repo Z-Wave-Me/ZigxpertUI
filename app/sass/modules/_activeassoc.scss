@@ -1,0 +1,34 @@
+/* Active assoc
+-------------------------------------------------- */
+/*.badge-assoc{
+    margin: 0 5px 5px 0;
+    padding: 5px;
+}*/
+.active-assoc-entry{
+    .btn{
+       margin: 0 $spacing-half $spacing-half 0;
+    }
+}
+
+.btn-group-assoc-devices.false-false .btn {
+    display: none;
+}
+
+.btn-group-assoc-devices.true-false .btn {
+    color: #333;
+    background-color: #f9f9f9;
+    border-color: #ccc;
+}
+
+.btn-group-assoc-devices.false-true .btn{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.btn-group-assoc-devices .btn.excluded-true{
+  text-decoration: line-through;
+  color: #333;
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+

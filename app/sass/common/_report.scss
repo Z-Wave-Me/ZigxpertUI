@@ -1,0 +1,68 @@
+/* Report
+-------------------------------------------------- */
+.app-row-report{
+    border-top: solid 1px $report-border-color;
+    background-color: $report-bcg-color;
+    border-bottom: solid 1px $report-border-color;
+}
+.report-entry {
+    border-bottom: solid 1px $report-border-color;
+    padding: $spacing $spacing-half;
+    width: 100%;
+    .report-col{
+        display: table-cell;
+         vertical-align: middle;
+    }
+    .report-media{
+        width: $report-img + $spacing;
+    }
+    .report-body{}
+    .report-ctrl{
+
+        min-width: 110px;
+        display: block;
+        text-align: right;
+    }
+
+    .report-ctrl-3{
+        min-width: 160px;
+    }
+    .report-col-w30{
+        width: 30%;
+    }
+}
+.rssi-bar {
+    display: flex;
+    position: relative;
+    .rssi-value {
+        text-align: end;
+        padding-left: 0.5ch;
+    ;
+    }
+    .std-label {
+        position: relative;
+        transform: translateX(-50%);
+        background: repeating-linear-gradient(
+                        300deg, rgb(0 0 0 / 50%) 0, rgb(0 0 0 / 50%) 1px, transparent 1px, transparent 2.4px
+        );
+        &::before {
+            content: attr(data-std);
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            color: rgb(0 0 0 / 50%);
+            transform: translate(.5ch, -50%);
+            font-size: .9rem;
+        }
+    }
+}
+
+.progress-bar-no-data {
+    background-color: lightgray;
+}
+.background-rssi {
+    width: 2px;
+    height: 1.4rem;
+    position: absolute;
+    border-left: 2px dashed rgb(0 0 0 / 50%);
+}

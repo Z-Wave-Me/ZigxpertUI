@@ -1,0 +1,61 @@
+/* Panel CSS
+-------------------------------------------------- */
+.panel {
+    border: 1px solid $app-border-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.panel-highlighted{
+    border: 4px solid darken($app-border-color,20%);
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.43);
+    -moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.43);
+    box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.43);
+}
+.panel-default > .panel-heading {
+    color: #2A6496;
+    font-size: 1rem !important;
+    font-weight: bold;
+    background-color: $app-color-secondary;
+    border-color: $app-border-color;
+}
+
+.panel-default > .panel-footer {
+    background-color: lighten($app-color-secondary,5%);
+    border-color: $app-border-color;
+}
+
+/* Well CSS
+-------------------------------------------------- */
+.well {
+
+    background-color: $app-color-secondary;
+    border: 1px solid $app-border-color;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel-heading.command {
+    padding: 5px 15px 5px 5px;
+    display: grid;
+    grid-template-columns: min-content min-content auto;
+    gap: 1rem;
+}
+.breadcrumb.command {
+    margin: 0;
+    padding: 0;
+    background: inherit;
+}
+.expert-command {
+    .panel-body {
+        padding: var(--space);
+    }
+    .list-group {
+        margin-bottom: calc(var(--space) * 2);
+    }
+    .panel-title {
+        font-size: 1.1rem;
+    }
+    input {
+        padding: var(--space);
+    }
+}

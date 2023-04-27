@@ -1,0 +1,384 @@
+// Reset the box-sizing
+//
+// Heads up! This reset may cause conflicts with some third-party widgets.
+// For recommendations on resolving such conflicts, see
+// http://getbootstrap.com/getting-started/#third-box-sizing
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing:border-box;
+}
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Body reset
+-------------------------------------------------- */
+html {
+    font-size: var(--font-size-regular);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+    font-family: $app-font-family-sans-serif;
+    font-size: var(--font-size-regular);
+    line-height: $app-line-height-base;
+    color: $app-body-color;
+    background-color: $app-body-bcg-color;
+}
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+ -------------------------------------------------- */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/* Typo
+-------------------------------------------------- */
+h1, h2, h3,h4{
+    margin-top: 0;
+    color: $app-heading-color;
+}
+h1 {
+    font-size: 1.6rem;
+}
+h1.btn-group{
+    margin: 0 calc(var(--space) * 2) 0 0;
+}
+
+h2 {
+    font-size: 1.4rem;
+    margin: var(--space) 0 calc(var(--space) / 2) 0;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1.1rem;
+}
+
+.item-cnt{
+    font-size: 80%;
+}
+.page-header {
+    padding: 0 0 $spacing 0;
+    margin: 0;
+    border: 0;
+    h1 {
+        font-size:$app-header-h1-font-size;
+        font-weight:bold;
+    }
+    .header-col{
+        padding: 0;
+    }
+}
+
+.perex{
+    margin: $spacing-double 0;
+    padding: $spacing-double 0 0 0;
+    border-top: 1px dotted $app-border-color;
+}
+
+.input-help{
+    color: #666666;
+    font-size: 13px;
+    line-height: 1.2em;
+}
+.input-help:hover{
+    color: #333;
+    cursor:help;
+}
+
+
+.tooltip-inner {
+    background-color: #1f355e;
+}
+
+.dropdown-menu {
+    border-color: #9fd8ef;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #e4f5fc;
+}
+
+.custom-ip-message{
+    display: none;
+}
+
+.newlines{
+    //padding-top: 0;
+    //margin-top: -40px;
+    white-space: pre-line;
+}
+
+/* Colors
+-------------------------------------------------- */
+.bcg-success{
+    background-color: lighten($app-brand-success, 30%);
+}
+
+.red,.is-updated-false{
+    color: red !important;
+}
+
+.green,.is-rfreshed{
+    color: green !important;
+}
+.green-light{
+    color: #8C0 !important;
+}
+
+.yellow{
+    color: yellow !important;
+}
+.gray{
+    color: gray !important;
+}
+.gray-light{
+    color: #cccccc !important;
+}
+.orange{
+    color: orange !important;
+}
+.black{
+    color: black !important;
+}
+
+.blue-info{
+    color: #5bc0de !important;
+
+}
+
+.main_spinner{
+    font-size: 14px;
+    color:#555;
+}
+
+.text-yellow{
+    color: yellow;
+}
+.text-orange{
+    color: orange;
+}
+/* Links
+-------------------------------------------------- */
+a, .order-by {
+    color: $app-a-color;
+    text-decoration: none;
+
+    &:hover,&:focus {
+        color: $app-a-hover-color;
+        text-decoration: underline;
+    }
+
+    &:focus {
+        // Default
+        outline: thin dotted;
+        // WebKit
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+}
+/* Fatal error
+-------------------------------------------------- */
+.app-fatal-error{
+    @include appBorderRadius($app-border-radius);
+    padding: $spacing-fatal-error;
+    margin: 0 0 $spacing-double 0;
+    //background: $app-error-background-color $img-fatal-error no-repeat $spacing ($spacing + $spacing-half);
+    background-color: $app-error-background-color;
+    border: solid 1px $app-error-border-color;
+    .fatal-error-message{
+        color: $app-error-message-color;
+        font-weight: bold;
+        font-size: $app-error-message-font-size;
+    }
+    .fatal-error-info{
+        margin: $spacing 0 0 0;
+        color: $app-error-info-color;
+        font-size: $app-error-info-font-size;
+    }
+}
+
+/* Others
+-------------------------------------------------- */
+.timestamp{
+    color: $app-timestamp-color;
+    font-size: $app-updatetime-font-size;
+    .fa{
+        font-size: $app-updatetime-icon-size; 
+    }
+}
+.bcg-success{
+    background-color: $app-bcg-success;
+}
+.bcg-active.false,.bcg-danger{
+    background-color: $app-bcg-danger;
+}
+
+.clickable{
+    cursor: pointer;
+}
+.notclickable{
+    cursor: text;
+}
+
+.text-supp{
+    font-style: italic;
+    color: lighten($app-body-color, 30%);
+}
+
+.badge{
+    padding: $spacing-half;
+    margin-right: $spacing-half;
+}
+.help-text{
+    display: block;
+    font-size: $helptext-font-size;
+    font-style: italic;
+    margin: $spacing-half 0;
+}
+.help-text.inline{
+    display: inline;
+
+}
+.display-block{
+    display: block;
+}
+
+.is-hidden,.alert-hidden,.alert- {
+    display: none !important;
+}
+
+.alert-list {
+    margin: 8px 0;
+}
+
+.text-alert,.text-alert-list {
+    font-size: 85%;
+    margin: 0 0 0 7px;
+}
+.text-alert {
+    margin: 7px 0;
+}
+.report-img{
+    display: inline-block;
+    max-width: 32px;
+}
+.hidden-selectopt{
+    display: none !important;
+}
+.line-through{
+  text-decoration: line-through;
+}
+
+
+/* Response
+-------------------------------------------------- */
+#respone_container {
+    display: none;
+
+}
+#respone_container_inner {
+    margin: 0 auto;
+    text-align: center;
+    /*position: relative;*/
+}
+.page-load-spinner{
+    z-index: 1000;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+}
+
+.response-message{
+    z-index: 1000;
+    text-align: center;
+    /* position: absolute;*/
+    width: 100%;
+}
+/* Progress bar
+-------------------------------------------------- */
+.progress {
+    margin-bottom: 0;
+}
+
+/* Hide elements
+-------------------------------------------------- */
+#page_init{
+    #header,.container-installer,#footer{
+        display: none;
+    }
+}
+
+/* QR code
+-------------------------------------------------- */
+.qrcode-wrap{
+    margin: 0 auto;
+    #qrcodev1_network, #qrcodev2_network{
+        margin: $spacing-double auto 0 auto;
+        //width: 200px;
+        text-align: center;
+        img {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 200px;
+        }
+    }
+}
+
+/* Security 2 icons
+-------------------------------------------------- */
+.security-2{
+    &.fa-stack{
+        width: 1em;
+    }
+    .fa-stack-1x,.fa-stack-1x{
+        text-align: left;
+    }
+    .icon-bottom{
+        color: darkgray;
+    }
+    .icon-top{
+        color: green;
+        left:4px; top:4px;
+    }
+    &.false{
+        .icon-top{
+            color: #a94442;
+        }
+    }
+}
+/* Dsk
+-------------------------------------------------- */
+.dsk-highlight{
+  span{
+    font-weight: bold;
+    font-size: 120%;
+  }
+}

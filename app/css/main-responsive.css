@@ -1,0 +1,373 @@
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+/*==========  Detected mobile devices  ==========*/
+
+@media (max-width: 2000px) {
+    .is-mobile-true .container{
+        width: 100%;
+    }
+    .is-mobile-true .mobile-hide{
+        display: none !important;
+    }
+
+    .is-mobile-true .navbar-header {
+        float: none;
+    }
+    .is-mobile-true .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .is-mobile-true .navbar-toggle {
+        display: block;
+    }
+    /*    .navbar-collapse {
+            border-top: 1px solid transparent;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .navbar-fixed-top {
+                    top: 0;
+                    border-width: 0 0 1px;
+            }*/
+
+    .is-mobile-true .navbar-collapse {
+        max-height: 340px;
+        padding-right: 15px;
+        padding-left: 15px;
+        overflow-x: visible;
+        -webkit-overflow-scrolling: touch;
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+    }
+    .is-mobile-true .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .is-mobile-true .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .is-mobile-true .navbar-nav>li {
+        float: none;
+    }
+    /*    .navbar-nav>li>a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }*/
+    .is-mobile-true .navbar-collapse.in {
+        overflow-y: auto !important;
+    }
+    .is-mobile-true .collapse.in{
+        display:block !important;
+    }
+    .is-mobile-true .navbar .divider-vertical{
+        display: none;
+    }
+
+    .is-mobile-true .navbar-nav .open .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .is-mobile-true .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color: #999;
+    }
+
+    /*    .collapse.in .dropdown{
+           margin: 0 !important;
+           padding: 0 !important;
+        }*/
+    #page_.is-mobile-true.custom-ip-true .home-page-image{
+        display: none !important;
+    }
+
+    .is-mobile-true .pull-right,.is-mobile-true .pull-left{
+        float: none !important;
+    }
+
+    /** Tables **/
+    /* Force table to not be like tables anymore */
+    .is-mobile-true #table_mobile table, .is-mobile-true #table_mobile_modal_1 table,
+    .is-mobile-true #table_mobile thead, .is-mobile-true #table_mobile_modal_1 thead,
+    .is-mobile-true #table_mobile tbody, .is-mobile-true #table_mobile_modal_1 tbody,
+    .is-mobile-true #table_mobile th, .is-mobile-true #table_mobile_modal_1 th,
+    .is-mobile-true #table_mobile td, .is-mobile-true #table_mobile_modal_1 td,
+    .is-mobile-true #table_mobile tr, .is-mobile-true #table_mobile_modal_1 tr { 
+        display: block; 
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .is-mobile-true #table_mobile thead tr th, .is-mobile-true #table_mobile_modal_1 thead tr th{ 
+        /*		position: absolute;
+                        top: -9999px;
+                        left: -9999px;*/
+        border: 0;
+        display: none;
+    }
+
+    .is-mobile-true #table_mobile thead tr th.mobile-show,  .is-mobile-true  #table_mobile_modal_1 thead tr th.mobile-show{ 
+        display: block !important;
+    }
+
+    .is-mobile-true #table_mobile tr,  .is-mobile-true #table_mobile_modal_1 tr { border: 1px solid #9fd8ef; }
+
+    .is-mobile-true #table_mobile td, .is-mobile-true #table_mobile_modal_1 td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #9fd8ef; 
+        position: relative;
+        padding-left: 50%; 
+        white-space: normal;
+        text-align:left;
+    }
+
+    .is-mobile-true #table_mobile td:before,.is-mobile-true #table_mobile_modal_1 td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+
+    /*
+    Label the data
+    */
+
+    .is-mobile-true #table_mobile td:before,.is-mobile-true #table_mobile_modal_1 td:before { content: attr(data-title); }
+
+    /** Tabs */
+    .is-mobile-true .tab-content {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+    .is-mobile-true .nav-tabs {
+        border-bottom: 0;
+
+    }
+    .is-mobile-true .nav-tabs > li > a {
+        margin-right:0;
+        border: 0;
+        border-radius:0;
+    }
+
+    .is-mobile-true .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 7px;
+    }
+
+    .is-mobile-true .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        border: 0;
+        background-color: transparent;
+    }
+
+    .is-mobile-true .nav > li > a:hover, .nav > li > a:focus {
+        background-color: transparent;
+        border: 0 !important;
+
+    }
+}
+
+.is-mobile-true .col-sm-6,.is-mobile-true .col-md-6,.is-mobile-true .col-lg-6{
+    width: 100% !important;
+    float: none;
+}
+
+@media only screen and (max-width: 800px) {
+
+
+}
+
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    /* Modal
+-------------------------------------------------- */
+.appmodal .appmodal-in{
+        width: 60%;
+}
+
+.appmodal-header .appmodal-close{
+        font-size: 140%;
+}
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .container{
+        width: 100%;
+    }
+    .navbar .divider-vertical{
+        display: none;
+    }
+    .pull-right,.pull-left{
+        float: none !important;
+    }
+
+    .mobile-hide{
+        display: none !important;
+    }
+
+    /* Force table to not be like tables anymore */
+    #table_mobile table,  #table_mobile_modal_1 table,
+    #table_mobile thead,  #table_mobile_modal_1 thead,
+    #table_mobile tbody,  #table_mobile_modal_1 tbody,
+    #table_mobile th,  #table_mobile_modal_1 th,
+    #table_mobile td,  #table_mobile_modal_1 td,
+    #table_mobile tr, #table_mobile_modal_1 tr { 
+        display: block; 
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #table_mobile thead tr th, #table_mobile_modal_1 table thead tr th{ 
+        /*        position: absolute;
+                top: -9999px;
+                left: -9999px;*/
+        border: 0;
+        display: none;
+    }
+    #table_mobile thead tr th.mobile-show,#table_mobile_modal_1 thead tr th.mobile-show{ 
+        display: block !important;
+    }
+
+    #table_mobile tr, #table_mobile_modal_1 tr { border: 1px solid #9fd8ef; }
+
+    #table_mobile td, #table_mobile_modal_1 td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #9fd8ef; 
+        position: relative;
+        padding-left: 50%; 
+        white-space: normal;
+        text-align:left;
+    }
+
+    #table_mobile td:before, #table_mobile_modal_1 td:before{ 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+    .table-responsive{
+        border: 0;
+    }
+    /*
+    Label the data
+    */
+    #table_mobile td:before,#table_mobile_modal_1 td:before { content: attr(data-title); }
+
+    /** Tabs */
+    .is-mobile-true #table_mobile td:before,.is-mobile-true #table_mobile_modal_1 td:before { content: attr(data-title); }
+
+    /** Tabs */
+    .tab-content {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+    .nav-tabs {
+        border-bottom: 0;
+
+    }
+    .nav-tabs > li > a {
+        margin-right:0;
+        border: 0;
+        border-radius:0;
+    }
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 7px;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        border: 0;
+        background-color: transparent;
+    }
+
+    .nav > li > a:hover, .nav > li > a:focus {
+        background-color: transparent;
+        border: 0 !important;
+
+    }
+
+    /*  Network controller
+-------------------------------------------------- */
+    .table-controller table{
+        margin-bottom: 20px !important;
+    }
+
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
+
+@media only screen and (min-width: 768px) and (max-width : 992px) {
+    .hide-navi-text{
+        display: none !important;
+    }
+}

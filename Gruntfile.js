@@ -1,0 +1,410 @@
+const zlib = require("zlib");
+const projectFiles = (app) => [
+    // Vendors
+    'vendor/justgagejs/justgage.js',
+    // App
+    'app/app.js',
+    'app/routes.js',
+    app.dir + '/app/js/templates.js',
+    // Modules
+    'app/modules/qAllSettled.js',
+    // Directives
+    'app/directives/directives.js',
+    'app/directives/angular-slider.js',
+    'app/directives/dir-pagination.js',
+    'app/directives/double-scroll-bars.min.js',
+    'app/directives/share/clipboard-copy.directive.js',
+    'app/directives/configuration/expert-command.directive.js',
+    'app/directives/configuration/menu.directive.js',
+    'app/directives/network/encryption-keys.directive.js',
+    'app/directives/network/controller-info.directive.js',
+    //Filters
+    'app/filters/filters.js',
+    //Services
+    'app/factories/factories.js',
+    'app/services/services.js',
+    'app/services/data-holder.service.js',
+    'app/services/configuration-commands.service.js',
+    // Controllers
+    'app/controllers/base.js',
+    'app/controllers/controllers.js',
+    'app/controllers/expert_config.js',
+    'app/controllers/auth.js',
+    'app/controllers/settings.js',
+    'app/controllers/settings.js',
+    'app/controllers/dongle.js',
+    'app/controllers/switch.js',
+    'app/controllers/sensor.js',
+    'app/controllers/meter.js',
+    'app/controllers/thermostat.js',
+    'app/controllers/lock.js',
+    'app/controllers/notification.js',
+    'app/controllers/status.js',
+    'app/controllers/battery.js',
+    'app/controllers/type.js',
+    'app/controllers/association.js',
+    'app/controllers/control.js',
+    'app/controllers/statistics.js',
+    'app/controllers/neighbor.js',
+    'app/controllers/reorganization.js',
+    'app/controllers/timing.js',
+    'app/controllers/linkstatus.js',
+    'app/controllers/packets.js',
+    'app/controllers/reset-statistic.js',
+    'app/controllers/rssi-report.controller.js',
+    'app/controllers/controllerinfo.js',
+    'app/controllers/queue.js',
+    'app/controllers/interviewcommand.js',
+    'app/controllers/license.js',
+    'app/controllers/uzb.js',
+    'app/controllers/zniffer.js',
+    'app/controllers/routemap.js',
+    'app/controllers/networkmap.js',
+    'app/controllers/home.js',
+    'app/controllers/configuration.js',
+    'app/controllers/configuration_interview.js',
+    'app/controllers/configuration_configuration.js',
+    'app/controllers/configuration-commands.js',
+    'app/controllers/configuration_association.js',
+    'app/controllers/configuration_firmware.js',
+    'app/controllers/configuration_health.js',
+    'app/controllers/configuration_postfix.js',
+    'app/controllers/rssi-report.controller.js',
+    'app/jquery/jquery-app.js']
+
+module.exports = function (grunt) {
+    // Application type : default/installer
+    var pkg = grunt.file.readJSON('package.json');
+    var app_type = pkg.app_type;
+    var app_cfg = pkg.type_cfg[pkg.app_type];
+    var app_version = pkg.version;
+    var git_message = pkg.version;
+    var app_rc = (pkg.rc ? pkg.rc + 1 : 0);
+
+    if (app_rc) {
+        app_version += '-RC-' + app_rc;
+        git_message += '-RC-' + pkg.rc;
+    }
+// Project configuration.
+    grunt.initConfig({
+        //pkg: grunt.file.readJSON('package.json'),
+        // Banner
+        banner: 'Copyright: Z-Wave.Me, Created: <%= grunt.template.today("dd-mm-yyyy HH:MM:ss") %>',
+        // Clean dir
+        clean: {
+            options: {force: true},
+            build: [app_cfg.dir + '/'],
+            doc: ['dist/storage/data/docs/'],
+            tmp: ['./tmp']
+        },
+        // NG templates
+        ngtemplates: {
+            app: {
+                options: {
+                    standalone: true,
+                    module: 'myAppTemplates',
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true,
+                        removeAttributeQuotes: true,
+                        removeComments: true, // Only if you don't use comment directives!
+                        removeEmptyAttributes: true,
+                        removeRedundantAttributes: true,
+                        removeScriptTypeAttributes: true,
+                        removeStyleLinkTypeAttributes: true
+                    }
+                },
+                src: 'app/views/**/*.html',
+                dest: app_cfg.dir + '/app/js/templates.js'
+            }
+        },
+        // Concat
+        concat: {
+            css: {
+                src: [
+                    'app/css/main.css'
+                ],
+                dest: app_cfg.dir + '/app/css/build.css'
+            },
+            custom: {
+              src: projectFiles(app_cfg),
+              dest: './tmp/bundle.js'
+            },
+            js: {
+                src: [
+                    // Vendors
+                    'vendor/jquery/jquery-1.11.1.min.js',
+                    'vendor/underscore/underscore-1.8.3/underscore-min.js',
+                    'vendor/cytoscape/cytoscape.min.js',
+                    'vendor/justgagejs/raphael-2.1.4.min.js',
+                    'vendor/upload/angular-file-upload-shim.min.js',
+                    'vendor/alertify/alertify.min.js',
+                    'vendor/qrcode/qrcode.min.js',
+                    'vendor/sha1/sha1.min.js',
+                    // Angular
+                    'vendor/angular/angular-1.2.14/angular.min.js',
+                    'vendor/upload/angular-file-upload.min.js',
+                    'vendor/angular/angular-1.2.14/angular-route.min.js',
+                    'vendor/angular/angular-1.2.14/angular-resource.min.js',
+                    'vendor/angular/angular-1.2.14/angular-cookies.min.js',
+                    'vendor/angular/angular-1.2.14/hammer.min.js',
+                    'vendor/angular/angular-1.2.14/angular.hammer.min.js',
+                    // Bootstrap
+                    'vendor/bootstrap/bootstrap.min.js',
+                    // XML
+                    'vendor/xml/xml2json.min.js',
+                    // CANVAS JS
+                    'vendor/canvasjs/canvasjs.min.js',
+                    // APP
+                    'tmp/bundle.babel.min.js'
+                ],
+                dest: app_cfg.dir + '/app/js/build.js'
+            }
+        },
+        json_generator: {
+            target: {
+                dest: "app/info.json",
+                options: {
+                    name: app_cfg.name,
+                    version: app_version,
+                    built: '<%= grunt.template.today("dd-mm-yyyy HH:MM:ss") %>',
+                    timestamp: '<%= Math.floor(Date.now() / 1000) %>'
+                }
+            }
+        },
+        compress: {
+            build: {
+                options: {
+                    mode: 'gzip',
+                    level: zlib.constants.Z_BEST_COMPRESSION,
+                },
+                expand: true,
+                cwd: 'dist/',
+                src: ['**/*.{js,css,html,json,ico}', '!**/config.js', '!index.html'],
+                dest: 'dist/',
+                ext: (ext) =>  ext + '.gz'
+            },
+        },
+        // Copy
+        copy: {
+            main: {
+                files: [
+                    {
+                        src: [
+                            'app/images/**',
+                            //'app/views/**',
+                            'app/lang/**',
+                            'favicon.ico'
+                        ], dest: app_cfg.dir + '/'
+                    },
+                    {src: ['storage/**'], dest: app_cfg.dir + '/'},
+                    {expand: true, src: ['app/config.js'], dest: app_cfg.dir + '/app/js/', flatten: true}
+                ]
+            },
+            info: {
+                files: [
+                    {src: ['app/info.json'], dest: app_cfg.dir + '/app/info.json'}
+                ]
+            },
+            fonts: {
+                files: [
+                    {expand: true, src: ['app/fonts/*'], dest: app_cfg.dir + '/app/fonts/', flatten: true}
+                ]
+            },
+            angmap: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['vendor/angular/angular-1.2.14/angular-cookies.min.js.map'],
+                        dest: app_cfg.dir + '/app/js/',
+                        flatten: true
+                    },
+                    {
+                        expand: true,
+                        src: ['vendor/angular/angular-1.2.14/angular.min.js.map'],
+                        dest: app_cfg.dir + '/app/js/',
+                        flatten: true
+                    },
+                    {
+                        expand: true,
+                        src: ['vendor/angular/angular-1.2.14/angular-route.min.js.map'],
+                        dest: app_cfg.dir + '/app/js/',
+                        flatten: true
+                    }
+                ]
+            },
+            licence: {
+                files: [
+                    {src: ['LICENCE.md'], dest: app_cfg.dir + '/LICENCE.md'}
+                ]
+            }
+        },
+        //CSSS min
+        cssmin: {
+            build: {
+                options: {
+                    banner: '/* <%= banner %> */',
+                    keepSpecialComments: 0
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: app_cfg.dir + '/app/css/',
+                        src: ['*.css', '!*.min.css'],
+                        dest: app_cfg.dir + '/app/css/',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
+        usebanner: {
+            jscss: {
+                options: {
+                    position: 'top',
+                    banner: '/* <%= banner %> */'
+                },
+                files: {
+                    src: [app_cfg.dir + '/app/js/templates.js', app_cfg.dir + '/app/js/config.js', app_cfg.dir + '/app/js/build.js']
+                }
+            },
+            html: {
+                options: {
+                    position: 'top',
+                    banner: '<!-- <%= banner %> -->'
+                },
+                files: {
+                    src: [app_cfg.dir + '/index.html']
+                }
+            }
+        },
+        htmlbuild: {
+            dist: {
+                src: 'index.html',
+                dest: app_cfg.dir + '/',
+                options: {
+                    sections: {
+                        dist_head: 'app/views/dist_head.txt'
+                    }
+                }
+
+            }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                        {
+                            match: /'app_type': 'default'/g,
+                            replacement: function () {
+                                return '\'app_type\': \'' + app_type + '\'';
+                            }
+                        },
+                        {
+                            match: /'app_type': 'installer'/g,
+                            replacement: function () {
+                                return '\'app_type\': \'' + app_type + '\'';
+                            }
+                        },
+                        {
+                            match: /'dev_host': \[([^\]]+)]/g,
+                            replacement: function () {
+                                return '\'dev_host\': \[\]';
+                            }
+                        },
+                        {
+                            match: /'interval': ([0-9a-zA-Z]+)/g,
+                            replacement: function () {
+                                return '\'interval\': 1000';
+                            }
+                        },
+                        {
+                            match: 'dev',
+                            replacement: 'live'
+                        },
+                        {
+                            match: 'app_name',
+                            replacement: app_cfg.name
+                        },
+                        {
+                            match: 'app_version',
+                            replacement: app_version
+                        },
+                        {
+                            match: 'app_built',
+                            replacement: '<%= grunt.template.today("dd-mm-yyyy HH:MM:ss") %>'
+                        }
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['app/config.js'], dest: app_cfg.dir + '/app/js/'}
+                ]
+            }
+        },
+        'release-it': {
+            options: {
+                pkgFiles: ['package.json'],
+                commitMessage: 'Release ' + app_cfg.name + ' ' + git_message,
+                tagName: '%s',
+                tagAnnotation: 'Release ' + app_cfg.name + ' ' + git_message,
+                buildCommand: false
+            }
+        },
+        uglify : {
+            build: {
+                files: {
+                    './tmp/bundle.babel.min.js': './tmp/bundle.babel.js'
+                }
+            }
+        },
+        babel: {
+            options: {
+                presets: [ "@babel/preset-env"],
+                plugins: ['angularjs-annotate'],
+                compact : true
+            },
+            dist: {
+                files: {
+                    './tmp/bundle.babel.js':'./tmp/bundle.js',
+                },
+            },
+        },
+
+    });
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-banner');
+    grunt.loadNpmTasks('grunt-json-generator');
+    grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-release-it');
+    grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-contrib-compress');
+
+
+    grunt.registerTask('default', [
+      'clean:build',
+        'ngtemplates',
+        'concat:custom',
+        'babel',
+        'uglify:build',
+        'concat:css',
+        'concat:js',
+        'json_generator',
+        'copy',
+        'cssmin',
+        'usebanner',
+        'htmlbuild',
+        'replace',
+        'clean:doc',
+        'clean:tmp',
+        'compress:build']);
+};

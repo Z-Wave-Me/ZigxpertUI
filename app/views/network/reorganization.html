@@ -1,0 +1,33 @@
+<!-- Reorganization view -->
+<div ng-controller="ReorganizationController">
+   <div class="page-header"><h1>{{ _t('nav_reorganization')}}</h1></div>
+    <bb-alert alert="alert"></bb-alert>
+
+    <div>
+        <div class="form-group form-inline">
+            <div class="btn-group">
+                <!-- Start -->
+                <button class="btn btn-default" title="{{_t('reorg_start')}}" ng-click="runReorganization()">
+                    <i class="fa fa-play"></i>
+                </button>
+            </div>
+        </div>
+        <bb-alert alert="reorganizations.run"></bb-alert>
+        <table class="table table-condensed">
+            <thead>
+                <th>{{ _t('time')}}</th>
+                <th>{{ _t('nav_status')}}</th>
+                <th>{{ _t('device_node_id')}}</th>
+                <th>{{ _t('device_node_name')}}</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="v in reorganizations.all track by $index" id="{{v.rowId}}">
+                <td>{{v.dateTime.time}}</td>
+                <td>{{v.message}}</td>
+                <td>{{v.nodeId}}</td>
+                <td>{{v.nodeName}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div>
+    <label>{{label}}</label>
+    <ul class="list-group" ng-if="type !=='enumof'">
+        <li class="list-group-item command-list">
+            <zigbee-input ng-if="['fix', 'range', 'string', 'node'].includes(type)"
+                          type="data.type"
+                          label="label"
+                          ng-model="value"
+                          index="0"
+                          store="store"
+                          value="data.type.value"
+            ></zigbee-input>
+        </li>
+    </ul>
+    <ul ng-if="type ==='enumof'" class="list-group">
+        <li ng-repeat="field in data.type.enumof track by $index" class="list-group-item command-list" ng-class="{'command-disable': model.selected !== $index}">
+            <label>
+            <input type="radio" ng-model="model.selected" ng-value="$index" ng-change="updateIndex()">
+            <zigbee-input
+                    type="field.type"
+                    label="field.label"
+                    ng-model="field.value"
+                    disabled="model.selected !== $index"
+                    store="store"
+                    index="$index">
+            </label>
+        </li>
+    </ul>
+</div>
