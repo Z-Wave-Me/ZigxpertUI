@@ -260,14 +260,13 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
     // Set device data
     var deviceImage = 'app/images/no_device_image.png';
     var deviceDescription = '';
-    var productName = '';
+    var productName = node.endpoints[1]?.clusters[0]?.data.modelIdentifier.value || '';
     var inclusionNote = '';
-    var brandName = 'TBD';
+    var brandName = node.endpoints[1]?.clusters[0]?.data.manufacturerName.value || '';
     var wakeupNote = '';
     var ZigbeePlusRoles = [];
     var securityInterview = '';
-    var deviceDescriptionAppVersion = 'TBD';//parseInt(node.data.applicationMajor.value, 10);
-    var deviceDescriptionAppSubVersion = 'TBD';//parseInt(node.data.applicationMinor.value, 10);
+    var deviceDescriptionAppVersion = node.endpoints[1]?.clusters[0]?.data.applicationVersion.value.toString() || '';
     var isSleepy = node.data.isSleepy.value;
     var manualUrl = "";
     var certNumber = "";
@@ -278,10 +277,6 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
     var securityS2Key = deviceService.getS2GrantedKeys(hasSecurityS2Cc);
 
     var hasWakeup = isSleepy;
-    if (isNaN(deviceDescriptionAppVersion))
-      deviceDescriptionAppVersion = '-';
-    if (isNaN(deviceDescriptionAppSubVersion))
-      deviceDescriptionAppSubVersion = '-';
     var zbNodeName = '';
     if (0x77 in node.endpoints[0].clusters) {
       // NodeNaming
@@ -370,10 +365,12 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
       "key": "device_description_brand",
       "val": brandName
     };
+    /* TBD
     obj["e"] = {
       "key": "device_description_device_type",
       "val": 'TBD' //node.data.deviceTypeString.value
     };
+    */
     obj["f"] = {
       "key": "device_description_product",
       "val": productName
@@ -404,17 +401,20 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
       };
       obj["m"] = {
         "key": "device_description_app_version",
-        "val": deviceDescriptionAppVersion + '.' + deviceDescriptionAppSubVersion
+        "val": deviceDescriptionAppVersion
       };
     }
+    /* TBD
     obj["o"] = {
       "key": "device_description_sdk_version",
       "val": sdk
     };
+    */
     obj["p"] = {
       "key": "command_class",
       "val": ccNames
     };
+    /* TBD
     obj["q"] = {
       "key": "zigbee_role_type",
       "val": ZigbeePlusRoles.join(', ')
@@ -442,7 +442,7 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
         "val": certNumber
       };
     }
-
+   */
 
     obj["x"] = {
       "key": "Productcode",

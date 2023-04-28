@@ -16,19 +16,7 @@
             </tr>
             <tr>
                 <td id="ctrl_info_homeid_title" class="controller-th">{{_t('ctrl_info_homeid_title')}}</td>
-                <td id="ctrl_info_homeid_value">{{master['txtHomeId']}}</td>
-            </tr>
-            <tr>
-                <td id="ctrl_info_primary_title" class="controller-th">{{_t('ctrl_info_primary_title')}}</td>
-                <td id="ctrl_info_primary_value">{{master['controller.data.isPrimary']? 'Yes': 'No'}}</td>
-            </tr>
-            <tr>
-                <td id="ctrl_info_real_primary_title" class="controller-th">{{_t('ctrl_info_real_primary_title')}}</td>
-                <td id="ctrl_info_real_primary_value">{{master['controller.data.isRealPrimary']? 'Yes': 'No'}}</td>
-            </tr>
-            <tr>
-                <td id="ctrl_info_suc_sis_title" class="controller-th">{{_t('ctrl_info_suc_sis_title')}}</td>
-                <td id="ctrl_info_suc_sis_value">{{master['txtSucSis']}}</td>
+                <td id="ctrl_info_homeid_value">{{master['controller.data.panId']}}</td>
             </tr>
             </tbody>
         </table>
@@ -38,18 +26,11 @@
             <tbody>
             <tr>
                 <td id="ctrl_info_hw_vendor_title" class="controller-th">{{_t('ctrl_info_hw_vendor_title')}}</td>
-                <td id="ctrl_info_hw_vendor_value">{{master['controller.data.vendor']}}</td>
+                <td id="ctrl_info_hw_vendor_value">{{master['controller.data.radioManufacturer']}}</td>
             </tr>
             <tr>
-                <td id="ctrl_info_hw_product_title" class="controller-th">{{_t('ctrl_info_hw_product_title')}}</td>
-                <td id="ctrl_info_hw_product_value">{{master['controller.data.manufacturerProductType']}} /
-                    {{master['controller.data.manufacturerProductId']}}
-                </td>
-            </tr>
-            <tr>
-                <td id="ctrl_info_hw_chip_title" class="controller-th">{{_t('ctrl_info_hw_chip_title')}}</td>
-                <td
-                id="ctrl_info_hw_chip_value">{{master['controller.data.ZigbeeChip']}}</td>
+                <td id="ctrl_info_hw_model_title" class="controller-th">{{_t('ctrl_info_hw_model_title')}}</td>
+                <td id="ctrl_info_hw_model_value">{{master['controller.data.radioBoardName']}}</td>
             </tr>
             </tbody>
         </table>
@@ -58,12 +39,8 @@
         <table class="table table-condensed">
             <tbody>
             <tr>
-                <td id="ctrl_info_sw_lib_title" class="controller-th">{{_t('ctrl_info_sw_lib_title')}}</td>
-                <td id="ctrl_info_sw_lib_value">{{master['controller.data.libType']}}</td>
-            </tr>
-            <tr>
                 <td id="ctrl_info_sw_sdk_title" class="controller-th">{{_t('ctrl_info_sw_sdk_title')}}</td>
-                <td id="ctrl_info_sw_sdk_value">{{master['controller.data.SDK']}}</td>
+                <td id="ctrl_info_sw_sdk_value">{{master['controller.data.EzspVersion']}}</td>
             </tr>
             <tr>
                 <td id="ctrl_info_sw_api_title" class="controller-th">{{_t('ctrl_info_sw_api_title')}}</td>
@@ -80,6 +57,7 @@
                 <td id="ctrl_info_uuid_value" ng-if="master['controller.data.majorSDK'] < 7">{{master['controller.data.uuid']}}</td>
                 <td ng-if="master['controller.data.majorSDK'] >= 7">{{master['controller.data.uuid16']}}</td>
             </tr>
+            <!-- TBD
             <tr>
                 <td id="ctrl_info_caps_subvendor_title" class="controller-th">{{_t('ctrl_info_caps_subvendor_title')}}</td>
                 <td id="ctrl_info_caps_subvendor_value">{{master['controller.data.firmware.caps.subvendor']}}</td>
@@ -149,6 +127,7 @@
                     <zigbee-more-options></zigbee-more-options>
                 </td>
             </tr>
+            -->
             </tbody>
         </table>
         <!-- Z_Way Software Information -->
@@ -187,6 +166,7 @@
     </div>
     <div class="well well-sm">
         <!-- nm_send_node_information  -->
+        <!-- TBD
         <button class="btn btn-primary"
                 ng-controller="SendNodeInformationController"
                 data-ng-click="sendNodeInformation('controller.SendNodeInformation()')"
@@ -198,7 +178,7 @@
                     icon="'fa-circle'">
             </bb-row-spinner>
         </button>
-
+        -->
 
         <!-- Debug mode  -->
         <button class="btn"
@@ -229,7 +209,9 @@
         </button>
 
         <!-- S0/S2 keys -->
+        <!-- TBD
         <zigbee-encryption-keys ng-if="cfg.zigbeecfg.debug"></zigbee-encryption-keys>
+        -->
         
         <!-- Update firmware  -->
         <a href="#uzb" class="btn btn-default">
@@ -237,18 +219,22 @@
         </a>
 
         <!-- Update licence  -->
+        <!-- TBD
         <a href="#licence" class="btn btn-default"
            ng-if="master['controller.data.manufacturerProductId'] == 1 && master['controller.data.manufacturerId'] == 277 && master['controller.data.manufacturerProductType'] == 1024 && master['controller.data.ZigbeeChip'] == 'ZW0500'">
             <i class="fa fa-certificate"></i> {{_t('licence_upgrade')}}
         </a>
+        -->
     </div>
 
+    <!-- TBD
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{_t('ctrl_info_func_list_title')}}</h3>
         </div>
         <div class="panel-body" ng-bind-html="funcList | toTrusted"></div>
     </div>
+    -->
 
     <!-- dataHolderModal -->
     <div id="dataHolderModal" class="appmodal appmodal-100" ng-show="modalArr.dataHolderModal">

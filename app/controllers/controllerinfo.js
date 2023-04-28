@@ -94,22 +94,14 @@ appController.controller('ControllerController', function($scope, $window, $filt
         };
         $scope.ZigbeeAPIData = ZigbeeAPIData;
         $scope.master['controller.data.nodeId'] = ZigbeeAPIData.controller.data.nodeId.value;
-        $scope.master['controller.data.homeId'] = ZigbeeAPIData.controller.data.homeId.value;
-        $scope.master['controller.data.isPrimary'] = ZigbeeAPIData.controller.data.isPrimary.value;
-        $scope.master['controller.data.isRealPrimary'] = ZigbeeAPIData.controller.data.isRealPrimary.value;
-        $scope.master['controller.data.SUCNodeId'] = ZigbeeAPIData.controller.data.SUCNodeId.value;
-        $scope.master['controller.data.SISPresent'] = ZigbeeAPIData.controller.data.SISPresent.value;
-        $scope.master['controller.data.vendor'] = ZigbeeAPIData.controller.data.vendor.value;
-        $scope.master['controller.data.manufacturerProductType'] = ZigbeeAPIData.controller.data.manufacturerProductType.value;
-        $scope.master['controller.data.manufacturerProductId'] = ZigbeeAPIData.controller.data.manufacturerProductId.value;
-        $scope.master['controller.data.manufacturerId'] = ZigbeeAPIData.controller.data.manufacturerId.value;
-        $scope.master['controller.data.ZigbeeChip'] = ZigbeeAPIData.controller.data.ZigbeeChip.value;
-        $scope.master['controller.data.libType'] = ZigbeeAPIData.controller.data.libType.value;
-        $scope.master['controller.data.SDK'] = ZigbeeAPIData.controller.data.SDK.value;
-        $scope.master['controller.data.majorSDK'] = ZigbeeAPIData.controller.data.SDK.value.split('.')[0];
-        $scope.master['controller.data.APIVersion'] = ZigbeeAPIData.controller.data.APIVersion.value;
-        $scope.master['controller.data.uuid'] = ZigbeeAPIData.controller.data.uuid.value;
-        $scope.master['controller.data.uuid16'] = ZigbeeAPIData.controller.data.uuid.value ? ZigbeeAPIData.controller.data.uuid.value.substring(16) : null;
+        $scope.master['controller.data.panId'] = ZigbeeAPIData.controller.data.panId.value;
+        $scope.master['controller.data.radioManufacturer'] = ZigbeeAPIData.controller.data.radioManufacturer.value;
+        $scope.master['controller.data.radioBoardName'] = ZigbeeAPIData.controller.data.radioBoardName.value;
+        $scope.master['controller.data.EzspVersion'] = ZigbeeAPIData.controller.data.EzspVersion.value;
+        $scope.master['controller.data.APIVersion'] = ZigbeeAPIData.controller.data.EmberZNetVersionMajor.value + "." + ZigbeeAPIData.controller.data.EmberZNetVersionMinor.value;
+        // TBD $scope.master['controller.data.uuid'] = ZigbeeAPIData.controller.data.uuid.value;
+        // TBD $scope.master['controller.data.uuid16'] = ZigbeeAPIData.controller.data.uuid.value ? ZigbeeAPIData.controller.data.uuid.value.substring(16) : null;
+        /* TBD
         if (ZigbeeAPIData.controller.data.firmware.caps.maxNodes.value) {
             $scope.master['controller.data.firmware.caps.subvendor'] = '0x' + dec2hex((ZigbeeAPIData.controller.data.firmware.caps.value[0] << 8) + ZigbeeAPIData.controller.data.firmware.caps.value[1]);
             $scope.master['controller.data.firmware.caps.nodes'] = ZigbeeAPIData.controller.data.firmware.caps.maxNodes.value;
@@ -133,18 +125,14 @@ appController.controller('ControllerController', function($scope, $window, $filt
                 $scope.master['controller.data.firmware.caps.cap'] = caps(ZigbeeAPIData.controller.data.firmware.caps.value);
             }
         }
+        */
         $scope.master['controller.data.softwareRevisionVersion'] = ZigbeeAPIData.controller.data.softwareRevisionVersion.value;
-        $scope.master['controller.data.firmware.caps.crc.value'] = ZigbeeAPIData.controller.data.firmware.caps.crc.value;
+        //$scope.master['controller.data.firmware.caps.crc.value'] = ZigbeeAPIData.controller.data.firmware.caps.crc.value;
         $scope.master['controller.data.softwareRevisionId'] = ZigbeeAPIData.controller.data.softwareRevisionId.value;
         $scope.master['controller.data.softwareRevisionDate'] = ZigbeeAPIData.controller.data.softwareRevisionDate.value;
         $scope.master['controller.data.softwareRevisionDate'] = ZigbeeAPIData.controller.data.softwareRevisionDate.value;
-        $scope.master['controller.data.frequency'] = ZigbeeAPIData.controller.data.frequency.value;
 
-        // Texts
-        $scope.master['txtHomeId'] = '';
-        $scope.master['txtSucSis'] = '';
-        setText($scope.master);
-
+        /* TBD
         // Function list
         var funcList = '';
         var _fc = array_unique(ZigbeeAPIData.controller.data.capabilities.value.concat(ZigbeeAPIData.controller.data.functionClasses.value));
@@ -159,7 +147,7 @@ appController.controller('ControllerController', function($scope, $window, $filt
             funcList += '<span style="color: ' + ((capIndex != -1) ? ((fcIndex != -1) ? '' : 'gray') : 'red') + '">' + fcName + ' (0x' + ('00' + func.toString(16)).slice(-2) + ')</span>  &#8226; ';
         });
         $scope.funcList = funcList;
-
+        */
     }
     function dec2hex(i)
     {
@@ -178,28 +166,5 @@ appController.controller('ControllerController', function($scope, $window, $filt
             result = i.toString(16);
         }
         return result;
-    }
-    // Get Queue updates
-    function setText(master) {
-        angular.forEach(master, function(v, k) {
-            var src = {};
-            switch (k) {
-                case 'controller.data.SUCNodeId':
-                    src['txtSucSis'] = (v != 0) ? (v.toString() + ' (' + (master['controller.data.SISPresent'] ? 'SIS' : 'SUC') + ')') : $scope._t('nm_suc_not_present');
-                    angular.extend($scope.master, src);
-                    break;
-                case 'controller.data.homeId':
-                    src['txtHomeId'] = '0x' + ('00000000' + (v + (v < 0 ? 0x100000000 : 0)).toString(16)).slice(-8);
-                    ;
-                    angular.extend($scope.master, src);
-                    break;
-
-                default:
-                    break;
-            }
-
-        });
-        return;
-
     }
 });

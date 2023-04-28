@@ -95,7 +95,7 @@ var config_data = {
 		'get_licence_scratchid': 'https://service.z-wave.me/license/index.php', // Get licence scratch id
 		'license_url': 'https://service.z-wave.me/licence/upgrade.php', // Url for license key
 		'buy_licence_key': 'https://z-wave.me/z-way/buy-z-way-license/', // Buy licence key url
-		'smarthome_login': '/smarthome/#/?fromexpert', // Smarthome login page
+		'smarthome_login': '/smarthome/#/?fromzigxpert', // Smarthome login page
 		'lang_dir': 'app/lang/', // Language directory
 		'lang': 'en', // Default language
 		'lang_list': ['en', 'de', 'fr', 'es', 'ru', 'cz', 'sk', 'sv', 'cn', 'pt'], // List of languages

@@ -2,77 +2,6 @@
 <div class="panel panel-default panel-highlighted">
     <div class="panel-heading"><i class="fa fa-cubes"></i> {{_t('nm_device_management')}}</div>
     <div class="panel-body">
-        <!-- Secure/Unsecure  -->
-        <div class="cfg-block" ng-controller="SetSecureInclusionController">
-            {{_t('nm_force_unsecure')}}
-            <div class="btn-group">
-                <!-- Secure S2 & S0 -->
-                <button type="button" class="btn btn-primary" id="btn_force_secure_lock"
-                        ng-class="controlDh.controller.secureInclusion == 2 ? 'active' : ''"
-                        ng-click="setSecureInclusion('controller.data.secureInclusion=2')"
-                        ng-disabled="[1, 2, 3, 4, 5, 6, 7].indexOf(controlDh.controller.controllerState) > -1 || rowSpinner['controller.data.secureInclusion=true']">
-                    <bb-row-spinner
-                            spinner="rowSpinner['controller.data.secureInclusion=2']"
-                            label="_t('btn_secure_s2_s0')"
-                            icon="'fa-lock'">
-                    </bb-row-spinner>
-                </button>
-                <!-- Secure S2 -->
-                <button type="button" class="btn btn-primary" id="btn_force_secure_lock"
-                        ng-class="controlDh.controller.secureInclusion == 1 ? 'active' : ''"
-                        ng-click="setSecureInclusion('controller.data.secureInclusion=1')"
-                        ng-disabled="[1, 2, 3, 4, 5, 6, 7].indexOf(controlDh.controller.controllerState) > -1 || rowSpinner['controller.data.secureInclusion=true']">
-                    <bb-row-spinner
-                            spinner="rowSpinner['controller.data.secureInclusion=1']"
-                            label="_t('btn_secure_s2')"
-                            icon="'fa-lock'">
-                    </bb-row-spinner>
-                </button>
-                <!-- Unsecure -->
-                <button type="button" class="btn btn-primary" id="btn_force_unsecure_lock"
-                        ng-class="controlDh.controller.secureInclusion == 0 ? 'active' : ''"
-                        ng-click="setSecureInclusion('controller.data.secureInclusion=0')"
-                        ng-disabled="[1, 2, 3, 4, 5, 6, 7].indexOf(controlDh.controller.controllerState) > -1 || rowSpinner['controller.data.secureInclusion=false']">
-                    <bb-row-spinner
-                            spinner="rowSpinner['controller.data.secureInclusion=0']"
-                            label="_t('btn_unsecure')"
-                            icon="'fa-unlock'">
-                    </bb-row-spinner>
-                </button>
-            </div>
-        </div>
-
-        <!-- Classic/LongRange  -->
-        <div class="cfg-block" ng-controller="SetLongRangeInclusionController">
-            {{_t('nm_force_long_range')}}
-            <div class="btn-group">
-                <!-- Classic -->
-                <button type="button" class="btn btn-primary" id="btn_force_lr_classic"
-                        ng-class="!controlDh.controller.longRangeInclusion ? 'active' : ''"
-                        ng-click="setLongRangeInclusion('controller.data.longRange.inclusion=false')"
-                        ng-disabled="[1, 2, 3, 4, 5, 6, 7].indexOf(controlDh.controller.controllerState) > -1 || rowSpinner['controller.data.longRange.inclusion=false'] || !controlDh.controller.longRangeEnabled">
-                    <bb-row-spinner
-                            spinner="rowSpinner['controller.data.longRange.inclusion=false']"
-                            label="_t('btn_lr_classic')"
-                            icon="'fa-spider-web'"
-                            core="'far'">
-                    </bb-row-spinner>
-                </button>
-                <!-- LongRange -->
-                <button type="button" class="btn btn-primary" id="btn_force_lr_longRange"
-                        ng-class="controlDh.controller.longRangeInclusion ? 'active' : ''"
-                        ng-click="setLongRangeInclusion('controller.data.longRange.inclusion=true')"
-                        ng-disabled="[1, 2, 3, 4, 5, 6, 7].indexOf(controlDh.controller.controllerState) > -1 || rowSpinner['controller.data.longRange.inclusion=true'] || !controlDh.controller.longRangeEnabled">
-                    <bb-row-spinner
-                            spinner="rowSpinner['controller.data.longRange.inclusion=true']"
-                            label="_t('btn_lr_long_range')"
-                            icon="'fa-asterisk'">
-                    </bb-row-spinner>
-                </button>
-            </div>
-            <p class="input-help" ng-hide="controlDh.controller.longRangeEnabled"><i class="fas fa-exclamation-triangle"></i> {{_t('nm_force_long_range_unsupported')}}</p>
-        </div>
-
         <!-- Include/Exclude  -->
         <div class="cfg-block" ng-controller="IncludeExcludeDeviceController">
             <!-- Basic info  -->
@@ -104,153 +33,24 @@
                 <i class="fa fa-stop-circle"></i> {{_t('nm_include_stop')}}
             </button>
             <!-- exclude start -->
+            <!-- TBD
             <button class="btn btn-info" id="nm_exclude_start" title="{{_t('nm_exclude_start_tooltip')}}"
                     ng-disabled="[1, 2, 3, 4, 20].indexOf(controlDh.controller.controllerState) > -1"
                     ng-if="[5, 6, 7].indexOf(controlDh.controller.controllerState) == -1"
                     ng-click="removeNodeToNetwork('controller.RemoveNodeFromNetwork(1)')">
                 <i class="fa fa-play-circle"></i> {{_t('nm_exclude_start')}}
             </button>
+            -->
             <!-- exclude stop -->
+            <!-- TBD
             <button class="btn btn-danger" id="nm_exclude_stop"
                     ng-if="[5, 6, 7].indexOf(controlDh.controller.controllerState) > -1"
                     ng-click="removeNodeToNetwork('controller.RemoveNodeFromNetwork(0)')">
                 <i class="fa fa-stop-circle"></i> {{_t('nm_exclude_stop')}}
             </button>
+            -->
             <p class="input-help" ng-if="controlDh.controller.limitReached" ng-bind-html="_t('nm_include_limit_reached') | toTrusted"></p>
         </div>
-
-        <!-- Show own DSK for CSA mode  -->
-        <div class="cfg-block" ng-if="controlDh.inclusion.controllerCSA && !controlDh.inclusion.securityAbandoned && !controlDh.inclusion.secureChannelEstablished">
-          <p>{{_t('nm_csa_pin')}}</p> <p class="dsk-highlight" ng-bind-html="controlDh.controller.controllerPinCSA|toTrusted"></p>
-        </div>
-
-        <!-- SmartStart  -->
-        <!-- <div class="cfg-block" ng-controller="SmartStartDeviceController">
-          <a class="btn btn-primary" id="btn_force_secure_lock" ng-href="#smartstartdsk">
-               <i class="fa fa-star"></i> {{_t('smart_start')}}
-          </a> -->
-
-          <!-- Enable SmartStart  -->
-         <!-- <button class="btn btn-info"
-                 id="btn_enable_secure_lock"
-                 ng-show="!smartStartEnabled"
-                 title="{{_t('nm_smartstart_enable_tooltip')}}"
-                 ng-click="enableSmartStart()">
-             <i class="fa fa-play-circle"></i> {{_t('nm_smartstart_enable')}}
-         </button> -->
-         <!-- disable SmartStart -->
-         <!-- <button
-                 class="btn btn-warning"
-                 id="btn_disable_secure_lock"
-                 ng-show="smartStartEnabled"
-                 ng-click="disableSmartStart()">
-             <i class="fa fa-stop-circle"></i> {{_t('nm_smartstart_disable')}}
-         </button>
-     </div>-->
     </div>
 </div>
-
-<!-- inclusionS2GrantKeysModal -->
-<div id="inclusionS2GrantKeys" class="appmodal" ng-if="controlDh.inclusion.grantKeys.show">
-    <!-- <div class="appmodal-in">-->
-    <form class="appmodal-in" name="form_inclusionS2GrantKeys" id="form_inclusionS2GrantKeys" ng-submit="">
-    <div class="appmodal-header">
-                <!--<span class="appmodal-close" ng-click="closeInclusionModal()"><i
-                        class="fa fa-times"></i></span>-->
-        <h3>{{_t('granted_keys')}}</h3>
-    </div>
-    <div class="appmodal-body">
-        <p>{{_t('select_auth_for_device')}}:</p>
-        <div class="alert alert-warning">{{controlDh.inclusion.grantKeys.countDown}}s {{_t('remain')}}</div>
-        <!--<pre>{{controlDh.inclusion.input|json}}</pre>-->
-        <div class="security-modal">
-            <div>
-                <div>
-                    <input type="checkbox" name="grantS0" value="false" id="grantS0" ng-model="controlDh.inclusion.input.keysGranted.S0" ng-disabled="!controlDh.inclusion.input.keysRequested.S0" />
-                    <label ng-class="{diabled_label: !controlDh.inclusion.input.keysRequested.S0}">{{_t('S0')}}</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="grantS2Unauthenticated" value="false" id="grantS2Unauthenticated" ng-model="controlDh.inclusion.input.keysGranted.S2Unauthenticated" ng-disabled="!controlDh.inclusion.input.keysRequested.S2Unauthenticated" />
-                    <label ng-class="{diabled_label: !controlDh.inclusion.input.keysRequested.S2Unauthenticated}">{{_t('S2_Unauthenticated')}}</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="grantS2Authenticated" value="false" id="grantS2Authenticated" ng-model="controlDh.inclusion.input.keysGranted.S2Authenticated" ng-disabled="!controlDh.inclusion.input.keysRequested.S2Authenticated" />
-                    <label ng-class="{diabled_label: !controlDh.inclusion.input.keysRequested.S2Authenticated}">{{_t('S2_Authenticated')}}</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="grantS2Access" value="false" id="grantS2Access" ng-model="controlDh.inclusion.input.keysGranted.S2Access" ng-disabled="!controlDh.inclusion.input.keysRequested.S2Access" />
-                    <label ng-class="{diabled_label: !controlDh.inclusion.input.keysRequested.S2Access}">{{_t('S2_Access')}}</label>
-                </div>
-            </div>
-            <div class="btn-group security-button text-center">
-                <button type="button" class="btn btn-success" ng-click="selectAllSecurity()">{{_t('selectAll')}}</button>
-            </div>
-        </div>
-    </div>
-    <div class="appmodal-footer">
-        <!-- Ok -->
-        <button type="button" class="btn btn-submit" ng-click="handleInclusionS2GrantKeys(controlDh.inclusion.input.keysGranted)">
-            <i class="fa fa-check"></i> <span class="btn-name">{{_t('ok')}}</span>
-        </button>
-    </div>
-    </form>
-    <!--</div>-->
-</div><!-- /#inclusionS2GrantKeysModal -->
-<!-- inclusionVerifyDSKModal -->
-<div id="inclusionVerifyDSKModal" class="appmodal" ng-if="controlDh.inclusion.grantKeys.anyChecked && controlDh.inclusion.verifyDSK.show">
-    <div class="appmodal-in">
-        <form name="dskForm">
-        <div class="appmodal-header">
-               <!-- <span class="appmodal-close" ng-click="closeInclusionModal()"><i
-                        class="fa fa-times"></i></span>-->
-            <h3>{{_t('verify_device_pin')}}</h3>
-        </div>
-        <div class="appmodal-body form-group form-inline ">
-                <p>{{_t('verify_included_pin')}}</p>
-                <div class="alert alert-warning">{{controlDh.inclusion.verifyDSK.countDown}}s remain</div>
-                <!-- name -->
-                <label>{{_t('pin')}}</label>
-                <input name="dsk_pin" id="dsk_pin" type="number" size="5" class="form-control input_number input-valid-{{dskForm.dsk_pin.$valid}}" min="0" max="65533" ng-if="controlDh.inclusion.input.publicKeyAuthenticationRequired"
-                       ng-model="controlDh.inclusion.input.dskPin" required />
-                <input name="dsk_1" id="dsk_1" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 1)" disabled="true" ng-if="!controlDh.inclusion.input.publicKeyAuthenticationRequired" />
-                -
-                <input name="dsk_pin2" id="dsk_pin2" type="number" size="5" class="form-control input_number input-valid-{{dskForm.dsk_pin.$valid}}" min="0" max="65533" ng-if="controlDh.inclusion.input.publicKeyAuthenticationRequired && controlDh.inclusion.input.csa"
-                       ng-model="controlDh.inclusion.input.dskPin2" required />
-                <input name="dsk_2" id="dsk_2" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 2)" disabled="true"
-                       ng-if="!controlDh.inclusion.input.csa"/>
-                -
-                <input name="dsk_3" id="dsk_3" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 3)" disabled="true" />
-                -
-                <input name="dsk_4" id="dsk_4" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 4)" disabled="true" />
-                -
-                <input name="dsk_5" id="dsk_5" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 5)" disabled="true" />
-                -
-                <input name="dsk_6" id="dsk_6" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 6)" disabled="true" />
-                -
-                <input name="dsk_7" id="dsk_7" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 7)" disabled="true" />
-                -
-                <input name="dsk_8" id="dsk_8" type="number" size="5" class="form-control input_number" ng-value="dskBlock(controlDh.inclusion.input.publicKey, 8)" disabled="true" />
-
-        </div>
-        <div class="appmodal-footer">
-            <!-- Cancel -->
-            <button type="button" class="btn btn-default" ng-click="handleInclusionVerifyDSK(false)">
-                <i class="fa fa-times text-danger"></i> <span class="btn-name">{{_t('btn_cancel')}}</span>
-            </button>
-            <!-- Confirm without PIN -->
-            <button type="button" class="btn btn-submit" ng-click="handleInclusionVerifyDSK(true)" ng-hide="controlDh.inclusion.input.publicKeyAuthenticationRequired">
-                <i class="fa fa-check-circle"></i> <span class="btn-name">{{_t('btn_no_pin_s2')}}</span>
-            </button>
-            <!-- Confirm with suggested PIN -->
-            <button type="button" class="btn btn-submit" ng-click="setKnownPin(); handleInclusionVerifyDSK(true)" ng-hide="!controlDh.inclusion.input.publicKeyAuthenticationRequired || controlDh.inclusion.input.publicKeyKnownPIN === ''">
-                <i class="fa fa-check"></i> <span class="btn-name-not-to-hide-in-mobile">{{controlDh.inclusion.input.publicKeyKnownPIN}}</span>
-            </button>
-            <!-- Confirm -->
-            <button type="button" class="btn btn-submit" ng-click="handleInclusionVerifyDSK(true)">
-                <i class="fa fa-check"></i> <span class="btn-name">{{_t('confirm')}}</span>
-            </button>
-        </div>
-            </form>
-    </div>
-</div><!-- /#inclusionVerifyDSKModal -->
 

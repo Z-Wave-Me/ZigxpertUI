@@ -16,13 +16,11 @@ appController.controller('HomeController', function ($scope, $filter, $timeout, 
         devicesCnt: {
             mains: 0,
             battery: 0,
-            flirs: 0,
             sum: 0
         },
         networkInformation: {
             mains: 0,
             battery: 0,
-            flirs: 0
         },
         networkSum: 0
     };
@@ -46,12 +44,12 @@ appController.controller('HomeController', function ($scope, $filter, $timeout, 
     $scope.loadZigbeeData = function () {
         dataService.loadZigbeeApiData().then(function (ZigbeeAPIData) {
             $scope.home.show = true;
-            var isRealPrimary = ZigbeeAPIData.controller.data.isRealPrimary.value;
+            // TDB var isRealPrimary = ZigbeeAPIData.controller.data.isRealPrimary.value;
             var hasDevices = Object.keys(ZigbeeAPIData.devices).length;
             $scope.ZigbeeAPIData = ZigbeeAPIData;
             setData(ZigbeeAPIData);
             $scope.controller.controllerState = ZigbeeAPIData.controller.data.controllerState.value;
-            $scope.controller.startLearnMode = !isRealPrimary || hasDevices < 2 ? true : false;
+            $scope.controller.startLearnMode = false; // in Zigbee we never allow learn mode
             $scope.refreshZigbeeData();
         }, function (error) {
             alertify.alertError($scope._t('error_load_data'));
@@ -159,11 +157,11 @@ appController.controller('HomeController', function ($scope, $filter, $timeout, 
              * Set network information
              */
             // Count mains devices
-            if ((node.data.isListening.value && node.data.isRouting.value) || (node.data.isListening.value && !node.data.isRouting.value)) {
+            if (!node.data.isSleepy.value) {
                 networkInformation.mains++;
             }
             // Count battery devices
-            else if (!node.data.isListening.value && !node.data.sensor250.value && !node.data.sensor1000.value) {
+            else {
                 if (node.endpoints[0].clusters[0x80]) {
                     batteryCharge = parseInt(node.endpoints[0].clusters[0x80].data.last.value);
                     if ( batteryCharge <= 20 && allInterviewsDone) {
@@ -172,13 +170,6 @@ appController.controller('HomeController', function ($scope, $filter, $timeout, 
                 }
                 networkInformation.battery++;
             }
-            // Count flirs devices
-            else if (node.data.sensor250.value || node.data.sensor1000.value) {
-
-                networkInformation.flirs++;
-            }
-            //networkInformation.sum++;
-
 
             var obj = {};
             obj['name'] = $filter('deviceName')(nodeId, node);
