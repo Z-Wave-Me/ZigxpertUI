@@ -257,6 +257,38 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
   function renderMethodSpec(ccId, data) {
     switch (ccId) {
 
+      // OnOff
+      case 0x0006:
+        return {
+          "Get": [],
+          "Set": [
+            {
+              "label": "Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Off",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "On",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        };
+      
+
       // LevelControl
       case 0x0008:
         return {
@@ -411,37 +443,6 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
             }
           ],
           "StopLevelChange": []
-        };
-
-      // OnOff
-      case 0x0006:
-        return {
-          "Get": [],
-          "Set": [
-            {
-              "label": "Level",
-              "type": {
-                "enumof": [
-                  {
-                    "label": "Off",
-                    "type": {
-                      "fix": {
-                        "value": 0
-                      }
-                    }
-                  },
-                  {
-                    "label": "On",
-                    "type": {
-                      "fix": {
-                        "value": 255
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
         };
 
       default:
