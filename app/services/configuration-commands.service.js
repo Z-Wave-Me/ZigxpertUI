@@ -16,254 +16,36 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
    */
   var serverCommands = function () {
     return {
-      Configuration: {
-        arrays: ['val'],
+      /*
+        values: ['name1', 'name2']
+        arrays: ['name1', 'name2']
+        arraysInArrays: ['name1', 'name2']
+      */
+      OnOff: {
+        values: ['onOff', 'globalSceneControl', 'onTime', 'offWaitTime']
       },
-      Association: {
-        arrays: ['nodes']
+      LevelControl: {
+        values: ['currentLevel', 'remainingTime', 'onOffTransitionTime', 'onLevel', 'onTransitionTime', 'offTransitionTime']
       },
-      MultiChannelAssociation: {
-        arrays: ['nodesInstances']
+      ColorControl: {
+        values: ['currentHue', 'currentSaturation', 'remainingTime', 'colorMode']
       },
-      Alarm: {
-        arraysInArrays: ['status', 'parameters']
+      IasZone: {
+        values: ['zoneState', 'zoneType', 'zoneStatus', 'zoneId', 'CurrentZoneSensitivityLevel'],
       },
-      Meter: {
-        arrays: ['val']
-      },
-      SensorMultilevel: {
-        arrays: ['val']
-      },
-      SensorBinary: {
-        arrays: ['level']
-      },
-      ThermostatSetPoint: {
-        arrays: ['val'],
-      },
-      ThermostatMode: {
-        values: ['mode']
-      },
-      ThermostatFanMode: {
-        values: ['mode', 'on']
-      },
-      Basic: {
-        values: ['level']
-      },
-      SwitchBinary: {
-        values: ['level']
-      },
-      SwitchMultilevel: {
-        values: ['level']
-      },
-      SwitchColor: {
-        arrays: ['level']
-      },
-      SwitchAll: {
-        values: ['mode'],
-      },
-      CentralScene: {
-        values: ['currentScene', 'keyAttribute']
+      PollControl: {
+        values: ['checkInInterval', 'longPollInterval', 'shortPollInterval', 'fastPollTimeout', 'checkInIntervalMin', 'shortPollIntervalMin', 'fastPollTimeoutMax']
       },
       DoorLock: {
-        values: ['mode', 'targetMode', 'insideHandlesMode', 'outsideHandlesMode', 'latchLocked', 'boltLocked', 'doorClosed', 'remainingLockTimeout', 'duration', 'operationType', 'insideHandlesEnabled', 'outsideHandlesEnabled', 'lockTimeout', 'autolockTime', 'holdReleaseTime', 'twistAssist', 'blockToBlock']
+        values: ['lockState', 'lockType', 'actuatorEnabled', 'doorState', 'doorOpenEvents', 'doorClosedEvents', 'openPeriod', 'enableLogging', 'ledSettings', 'autoRelockTime', 'soundVolume', 'operatingMode', 'enableOneTouchLocking', 'enableInsideStatusLED', 'enablePrivacyModeButton', 'wrongCodeEntryLimit', 'userCodeTemporaryDisableTime', 'sendPINOverTheAir', 'requirePINforRFOperation', 'zigBeeSecurityLevel', 'alarmMask', 'keypadOperationEventMask', 'rfOperationEventMask', 'manualOperationEventMask', 'rfidOperationEventMask', 'keypadProgrammingEventMask', 'rfProgrammingEventMask', 'rfidProgrammingEventMask']
       },
-      UserCode: {
-        arrays: ['status', 'hasCode']
-      },
-      Wakeup: {
-        values: ['interval', 'nodeId']
-      },
-      Battery: {
-        values: ['last']
-      },
-      PowerLevel: {
-        values: ['level', 'timeout']
+      Alarm: {
+        arrays: ['alarmTable', 'alarmCode', 'clusterId', 'timeStamp']
       }
     }
   }
   function nodeProperty() {
     return [
-      {
-        "label": "acceptSetSecurityLevel",
-        "type": {
-          "enumof": [
-            {
-              "label": "Accept Set commands on the controller most secure level (default)",
-              "type": {
-                "fix": {
-                  "value": null
-                }
-              }
-            },
-            {
-              "label": "Accept Set commands on S2 Access",
-              "type": {
-                "fix": {
-                  "value": 4
-                }
-              }
-            },
-            {
-              "label": "Accept Set commands on S2 Authenticated",
-              "type": {
-                "fix": {
-                  "value": 2
-                }
-              }
-            },
-            {
-              "label": "Accept Set commands on S2 Unauthenticated",
-              "type": {
-                "fix": {
-                  "value": 1
-                }
-              }
-            },
-            {
-              "label": "Accept Set commands on S0",
-              "type": {
-                "fix": {
-                  "value": 0x80
-                }
-              }
-            },
-            {
-              "label": "Accept Set commands without encryption",
-              "type": {
-                "fix": {
-                  "value": 0
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "label": "acceptReportSecurityLevel",
-        "type": {
-          "enumof": [
-            {
-              "label": "Accept Report commands on device most secure level (default)",
-              "type": {
-                "fix": {
-                  "value": null
-                }
-              }
-            },
-            {
-              "label": "Accept Report commands on S2 Access",
-              "type": {
-                "fix": {
-                  "value": 4
-                }
-              }
-            },
-            {
-              "label": "Accept Report commands on S2 Authenticated",
-              "type": {
-                "fix": {
-                  "value": 2
-                }
-              }
-            },
-            {
-              "label": "Accept Report commands on S2 Unauthenticated",
-              "type": {
-                "fix": {
-                  "value": 1
-                }
-              }
-            },
-            {
-              "label": "Accept Report commands on S0",
-              "type": {
-                "fix": {
-                  "value": 0x80
-                }
-              }
-            },
-            {
-              "label": "Accept Report commands without encryption",
-              "type": {
-                "fix": {
-                  "value": 0
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "label": "mapBasicSetToSpecificReport",
-        "type": {
-          "enumof": [
-            {
-              "label": "Don't interpret Basic Set as a Report (default)",
-              "type": {
-                "fix": {
-                  "value": false
-                }
-              }
-            },
-            {
-              "label": "Interpret Basic Set as a sensor Report (for old buggy devices that don't send Reports)",
-              "type": {
-                "fix": {
-                  "value": true
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "label": "unsolicitedReportOnSet",
-        "type": {
-          "enumof": [
-            {
-              "label": "Don't rely on unsolicited Reports from the device and make an explicit Get after a Set",
-              "type": {
-                "fix": {
-                  "value": 0
-                }
-              }
-            },
-            {
-              "label": "Expect the device to send an unsolitied Report after Set to device's group #",
-              "type": {
-                "range": {
-                  "min": 1,
-                  "max": 255
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "label": "multicastGroup",
-        "type": {
-          "enumof": [
-            {
-              "label": "Multicast disabled",
-              "type": {
-                "fix": {
-                  "value": 0
-                }
-              }
-            },
-            {
-              "label": "Multicast group",
-              "type": {
-                "range": {
-                  "min": 1,
-                  "max": 100
-                }
-              }
-            }
-          ]
-        }
-      },
       {
         "label": "givenName",
         "type": {
