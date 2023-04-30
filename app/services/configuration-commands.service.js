@@ -292,48 +292,6 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
       // LevelControl
       case 0x0008:
         return {
-          "overrideDefaultDuration": {
-            "label": "If not specifically specified in Set, use this duration instead of the device default value",
-            "type": {
-              "enumof": [
-                {
-                  "label": "use device default",
-                  "type": {
-                    "fix": {
-                      "value": null
-                    }
-                  }
-                },
-                {
-                  "label": "immediately",
-                  "type": {
-                    "fix": {
-                      "value": 0
-                    }
-                  }
-                },
-                {
-                  "label": "in seconds",
-                  "type": {
-                    "range": {
-                      "min": 1,
-                      "max": 127
-                    }
-                  }
-                },
-                {
-                  "label": "in minutes",
-                  "type": {
-                    "range": {
-                      "min": 1,
-                      "max": 127,
-                      "shift": 127
-                    }
-                  }
-                }
-              ]
-            }
-          },
           "Get": [],
           "MoveToLevelOnOff": [
             {
@@ -392,57 +350,7 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                 ]
               }
             }
-          ],
-          "StartLevelChange": [
-            {
-              "label": "Direction",
-              "type": {
-                "enumof": [
-                  {
-                    "label": "Up",
-                    "type": {
-                      "fix": {
-                        "value": 0
-                      }
-                    }
-                  },
-                  {
-                    "label": "Down",
-                    "type": {
-                      "fix": {
-                        "value": 1
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Duration",
-              "type": {
-                "enumof": [
-                  {
-                    "label": "immediately",
-                    "type": {
-                      "fix": {
-                        "value": 0
-                      }
-                    }
-                  },
-                  {
-                    "label": "in seconds",
-                    "type": {
-                      "range": {
-                        "min": 1,
-                        "max": 255
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ],
-          "StopLevelChange": []
+          ]
         };
 
       default:
