@@ -283,13 +283,6 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
 
 
     }
-    // Security interview
-    if (0x9F in node.endpoints[0].clusters) {
-      securityInterview = node.endpoints[0].clusters[0x9F].data.interviewDone.value && !node.endpoints[0].clusters[0x9F].data.securityAbandoned.value && node.data.secureChannelEstablished.value;
-    }
-    else if (0x98 in node.endpoints[0].clusters) {
-      securityInterview = node.endpoints[0].clusters[0x98].data.interviewDone.value && !node.endpoints[0].clusters[0x98].data.securityAbandoned.value && node.data.secureChannelEstablished.value;
-    }
 
     var sdk = 'TDB';
     /*
