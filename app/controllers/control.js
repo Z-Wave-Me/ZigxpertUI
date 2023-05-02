@@ -122,164 +122,6 @@ appController.controller('ControlController', function ($scope, $interval, $time
         $scope.controlDh.interval = $interval(refresh, $scope.cfg.interval);
     };
 
-    /**
-     * Handle inclusionS2GrantKeys
-     */
-    $scope.handleInclusionS2GrantKeys = function (keysGranted, timedOut) {
-        var alertMessage = '';
-        // Is any checkbox checked?
-        angular.forEach(keysGranted, function (v) {
-            if (v == true) {
-                $scope.controlDh.inclusion.grantKeys.anyChecked = true
-                return;
-            }
-        });
-        // Is timed out
-        if (timedOut) {
-            alertMessage += $scope._t('s2_timeout') + '. ';
-
-        }
-        // Nothing is checked
-        if (!$scope.controlDh.inclusion.grantKeys.anyChecked) {
-            alertMessage += $scope._t('no_s2_channel');
-
-        }
-        // Show an alert
-        if (alertMessage) {
-            $scope.controlDh.inclusion.alertS2 = {
-                message: alertMessage,
-                status: 'alert-danger',
-                icon: false
-            };
-        }
-
-
-        $scope.controlDh.inclusion.grantKeys.show = false;
-        $scope.controlDh.inclusion.grantKeys.done = true;
-        $interval.cancel($scope.controlDh.inclusion.grantKeys.interval);
-        var nodeId = $scope.controlDh.inclusion.lastIncludedDeviceId.toString(10),
-                cmd =
-                'devices[' + nodeId + '].SecurityS2.data.grantedKeys.S0=' + keysGranted.S0 + '; ' +
-                'devices[' + nodeId + '].SecurityS2.data.grantedKeys.S2Unauthenticated=' + keysGranted.S2Unauthenticated + '; ' +
-                'devices[' + nodeId + '].SecurityS2.data.grantedKeys.S2Authenticated=' + keysGranted.S2Authenticated + '; ' +
-                'devices[' + nodeId + '].SecurityS2.data.grantedKeys.S2Access=' + keysGranted.S2Access + '; ' +
-                'devices[' + nodeId + '].SecurityS2.data.grantedKeys=true';
-        $scope.runZigbeeCmd(cmd)
-    };
-
-    /**
-     * Handle inclusionS2VerifyDSK
-     */
-    $scope.handleInclusionVerifyDSK = function (confirmed, timedOut) {
-        var alertMessage = '';
-        // Is timed out
-        if (timedOut) {
-            $scope.controlDh.inclusion.alertS2 = {
-                message: $scope._t('s2_timeout'),
-                status: 'alert-danger',
-                icon: false
-            };
-
-        }
-        // Is confirmed
-        if (confirmed) {
-            $scope.controlDh.inclusion.alertS2 = {
-                message: $scope._t('wait_key_veriffication'),
-                status: 'alert-warning',
-                icon: 'fa-spinner fa-spin'
-            };
-
-        }
-        $scope.controlDh.inclusion.verifyDSK.show = false;
-        $scope.controlDh.inclusion.verifyDSK.done = true;
-        $interval.cancel($scope.controlDh.inclusion.verifyDSK.interval);
-        var dskPin = parseInt($scope.controlDh.inclusion.input.dskPin, 10),
-                dskPin2 = parseInt($scope.controlDh.inclusion.input.dskPin2, 10),
-                nodeId = $scope.controlDh.inclusion.lastIncludedDeviceId.toString(10),
-                publicKey = [];
-                
-        dskPin = $filter('zeroFill')(dskPin,5);
-        dskPin2 = $filter('zeroFill')(dskPin2,5);
-        
-        if (confirmed) {
-            publicKey = $scope.controlDh.inclusion.input.publicKey;
-            publicKey[0] = (dskPin >> 8) & 0xff;
-            publicKey[1] = dskPin & 0xff;
-            if ($scope.controlDh.inclusion.input.csa) {
-                publicKey[2] = (dskPin2 >> 8) & 0xff;
-                publicKey[3] = dskPin2 & 0xff;
-            }
-        }
-        console.log(publicKey.join(','))
-        var cmd = 'devices[' + nodeId + '].SecurityS2.data.publicKeyVerified=[' + publicKey.join(',') + '];';
-        $scope.runZigbeeCmd(cmd);
-        $timeout(function () {
-            checkS2Interview(nodeId);
-        }, 20000);
-
-    };
-    
-    $scope.setKnownPin = function() {
-        $scope.controlDh.inclusion.input.dskPin = $scope.controlDh.inclusion.input.publicKeyKnownPIN;
-    };
-    
-    $scope.handleInclusionCSA = function (confirmed, timedOut) {
-        var alertMessage = '';
-        // Is timed out
-        if (timedOut) {
-            $scope.controlDh.inclusion.alertS2 = {
-                message: $scope._t('s2_timeout'),
-                status: 'alert-danger',
-                icon: false
-            };
-
-        }
-        // Is confirmed
-        if (confirmed) {
-            $scope.controlDh.inclusion.alertS2 = {
-                message: $scope._t('wait_key_veriffication'),
-                status: 'alert-warning',
-                icon: 'fa-spinner fa-spin'
-            };
-
-        }
-        $scope.controlDh.inclusion.verifyDSK.show = false;
-        $scope.controlDh.inclusion.verifyDSK.done = true;
-        $interval.cancel($scope.controlDh.inclusion.verifyDSK.interval);
-        var dskPin = parseInt($scope.controlDh.inclusion.input.dskPin, 10),
-                dskPin2 = parseInt($scope.controlDh.inclusion.input.dskPin2, 10),
-                nodeId = $scope.controlDh.inclusion.lastIncludedDeviceId.toString(10),
-                publicKey = [];
-                
-        dskPin = $filter('zeroFill')(dskPin,5);
-        dskPin2 = $filter('zeroFill')(dskPin2,5);
-        
-        if (confirmed) {
-            publicKey = $scope.controlDh.inclusion.input.publicKey;
-            publicKey[0] = (dskPin >> 8) & 0xff;
-            publicKey[1] = dskPin & 0xff;
-            if ($scope.controlDh.inclusion.input.csa) {
-                publicKey[2] = (dskPin2 >> 8) & 0xff;
-                publicKey[3] = dskPin2 & 0xff;
-            }
-        }
-        console.log(publicKey.join(','))
-        var cmd = 'devices[' + nodeId + '].SecurityS2.data.publicKeyVerified=[' + publicKey.join(',') + '];';
-        $scope.runZigbeeCmd(cmd);
-        $timeout(function () {
-            checkS2Interview(nodeId);
-        }, 20000);
-
-    };
-
-    $scope.selectAllSecurity = function () {
-        ['S0', 'S2Unauthenticated', 'S2Authenticated', 'S2Access'].map(function (key) {
-            if ($scope.controlDh.inclusion.input.keysRequested[key]) {
-                $scope.controlDh.inclusion.input.keysGranted[key] = true;
-            }
-        });
-    }
-
     /// --- Private functions --- ///
     /**
      * Set controller data
@@ -376,22 +218,8 @@ appController.controller('ControlController', function ($scope, $interval, $time
                 break;
             case 1:
                 // Device inclusion
-                if ($scope.controlDh.controller.isSIS || $scope.controlDh.controller.isPrimary) {
-                    $scope.controlDh.inclusion.alertPrimary = {
-                        message: $scope._t('nm_controller_sis_or_primary'),
-                        status: 'alert-info',
-                        icon: false
-                    };
-                }
-                if (!$scope.controlDh.controller.isSIS && !$scope.controlDh.controller.isPrimary) {
-                    $scope.controlDh.inclusion.alertPrimary = {
-                        message: $scope._t('nm_controller_not_sis_or_primary'),
-                        status: 'alert-danger',
-                        icon: false
-                    };
-                }
-
                 break;
+            /*
             case 9:
                 // Network inclusion
                 $scope.controlDh.network.inclusionProcess = 'processing';
@@ -419,7 +247,7 @@ appController.controller('ControlController', function ($scope, $interval, $time
                     icon: 'fa-smile'
                 };
                 break;
-
+            */
             default:
                 break;
         }
@@ -488,16 +316,6 @@ appController.controller('ControlController', function ($scope, $interval, $time
                 status: 'alert-success',
                 icon: 'fa-smile'
             };
-
-            if (node.endpoints[0].clusters[152] || node.endpoints[0].clusters[159]) {
-                $scope.controlDh.inclusion.secureChannelEstablished = node.data.secureChannelEstablished.value;
-                if (node.endpoints[0].clusters[159]) {
-                    alertify.alertWarning($scope._t('device_interview_wait_s2'));
-                    $scope.controlDh.inclusion.securityAbandoned = node.endpoints[0].clusters[159].data.securityAbandoned.value;
-                } else {
-                    $scope.controlDh.inclusion.securityAbandoned = node.endpoints[0].clusters[152].data.securityAbandoned.value;
-                }
-            }
         }
 
         /**
@@ -795,49 +613,6 @@ appController.controller('ZigbeeChipRebootResetController', function ($scope, cf
 });
 
 /**
- * Change Zigbee Z-Stick 4 frequency.
- * @class ChangeFrequencyController
- *
- */
-appController.controller('ChangeFrequencyController', function ($scope, $timeout) {
-    /**
-     * Send Configuration ZMEFreqChange
-     * @param {string} cmd
-     */
-    $scope.frequency = {
-        arrays: {
-            EuRuInCn: ['EU', 'RU', 'IN', 'CN'],
-            UsIl: ['US', 'IL'],
-            AnzHk: ['ANZ', 'HK'],
-            KrJp: ['KR', 'JP']
-        },
-        currentFreqArr: '',
-        currentFreq: $scope.controlDh.controller.frequency
-    };
-
-    if ($scope.frequency.currentFreq &&
-            ['unsupported', 'unknown', 'undefined'].indexOf($scope.frequency.currentFreq) < 0) {
-        Object.keys($scope.frequency.arrays).forEach(function (freqBand) {
-            if ($scope.frequency.arrays[freqBand].indexOf($scope.frequency.currentFreq) > -1) {
-                $scope.frequency.currentFreqArr = freqBand;
-                return;
-            }
-        })
-    } else {
-        $scope.frequency.currentFreqArr = null;
-    }
-
-    $scope.zmeFreqChange = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-        $timeout(function () {
-            $scope.frequency.currentFreq = $scope.controlDh.controller.frequency;
-        }, 1000);
-
-
-    };
-});
-
-/**
  * The controller will then mark the device as 'failed'
  * but will keep it in the current network con guration.
  * @class RemoveFailedNodeController
@@ -970,58 +745,6 @@ appController.controller('SendNodeInformationController', function ($scope) {
 });
 
 /**
- * This controller allows controlling the SUC/SIS function for the Zigbee network.
- * @class SucSisController
- *
- */
-appController.controller('SucSisController', function ($scope) {
-    /**
-     * Get the SUC Node ID from the network.
-     *  @param {string} cmd
-     */
-    $scope.getSUCNodeId = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-    };
-
-    /**
-     * Request network topology update from SUC/SIS.
-     *  @param {string} cmd
-     */
-    $scope.requestNetworkUpdate = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-    };
-
-    /**
-     * Assign SUC function to a node in the network that is capable of running there SUC function
-     * nodeId=x Node id to be assigned as SUC
-     *  @param {string} cmd
-     */
-    $scope.setSUCNodeId = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-    };
-
-    /**
-     * Assign SIS role to a device
-     * nodeId=x Node id to be assigned as SIS
-     * @param {string} cmd
-     */
-    $scope.setSISNodeId = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-    };
-
-    /**
-     * Revoke SUC/SIS role from a device
-     * nodeId=x Node id to be disabled as SUC
-     *  @param {string} cmd
-     */
-    $scope.disableSUCNodeId = function (cmd) {
-        $scope.runZigbeeCmd(cmd);
-    };
-
-
-});
-
-/**
  * This sets Promiscuous mode to true/false.
  * @class SetPromiscuousModeController
  *
@@ -1033,74 +756,5 @@ appController.controller('SetPromiscuousModeController', function ($scope) {
      */
     $scope.setPromiscuousMode = function (cmd) {
         $scope.runZigbeeCmd(cmd, 1000, true);
-    };
-});
-
-/**
- * This tests QR code
- * @class S2DskController
- *
- */
-appController.controller('S2DskController', function ($scope) {
-    var qrcodev1 = new QRCode("qrcodev1_network", {
-        text: $scope.controlDh.controller.publicKeyQRv1,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-    var qrcodev2 = new QRCode("qrcodev2_network", {
-        text: $scope.controlDh.controller.publicKeyQRv2,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.L
-    });
-});
-
-/**
- * This turns the Zigbee controller into an inclusion/exclusion mode that allows including/excluding a device.
- * @class IncludeDeviceController
- *
- */
-appController.controller('SmartStartDeviceController', function ($scope, $route, $timeout, cfg, dataService) {
-
-    $scope.smartStartEnabled = false;
-    /**
-     * Start Smart Scan.
-     * Turns the controller into an Smart Start inclusion mode that allows including a Smart start device.
-     */
-    $scope.enableSmartStart = function () {
-        timeout = 1000;
-        $scope.toggleRowSpinner('zway.SmartStartEnable()');
-        dataService.runZigbeeCmd(cfg.enable_smart_start).then(function (response) {
-            $scope.smartStartEnabled = true;
-            $timeout($scope.toggleRowSpinner, timeout);
-        }, function (error) {
-            $scope.toggleRowSpinner();
-            if (!hideError) {
-                alertify.alertError($scope._t('error_update_data') + '\n' + 'zway.SmartStartEnable()');
-            }
-        });
-    };
-
-    /**
-     * Stop Smart Scan.
-     * Turns the controller back into default mode.
-     */
-    $scope.disableSmartStart = function (cmd) {
-        timeout = 1000;
-        $scope.toggleRowSpinner('controller.RemoveNodeFromNetwork(0)');
-        dataService.runZigbeeCmd(cfg.store_url + 'controller.RemoveNodeFromNetwork(0)').then(function (response) {
-            $scope.smartStartEnabled = false;
-            $timeout($scope.toggleRowSpinner, timeout);
-        }, function (error) {
-            $scope.toggleRowSpinner();
-            if (!hideError) {
-                alertify.alertError($scope._t('error_update_data') + '\n' + 'controller.RemoveNodeFromNetwork(0)');
-            }
-        });
     };
 });

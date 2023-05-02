@@ -124,8 +124,7 @@ appController.controller('HomeController', function ($scope, $filter, $timeout, 
     function setData(ZigbeeAPIData) {
         var networkInformation = {
             mains: 0,
-            battery: 0,
-            flirs: 0
+            battery: 0
         };
         var controllerNodeId = ZigbeeAPIData.controller.data.nodeId.value;
         var networkSum = 0;

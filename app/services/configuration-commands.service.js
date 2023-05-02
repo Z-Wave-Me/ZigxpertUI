@@ -366,19 +366,16 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
         // allow everything, since events can come from any device via timed_event
         return false;
 
-      // skip virtual, controller or broadcast as event source
-      //return ( (ZigbeeAPIData.devices[dev].data.isVirtual.value || dev == ZigbeeAPIData.controller.data.nodeId.value || dev == 255));
-
       case 'dstnode':
-        // skip not virtual, not controller and not broadcast as event destination
-        return (!(ZigbeeAPIData.devices[dev].data.isVirtual.value || dev == ZigbeeAPIData.controller.data.nodeId.value || dev == 255));
+        // skip not controller
+        return dev != ZigbeeAPIData.controller.data.nodeId.value;
 
       case 'device':
-        return ZigbeeAPIData.devices[dev].data.isVirtual.value || dev == ZigbeeAPIData.controller.data.nodeId.value;
+        return dev == ZigbeeAPIData.controller.data.nodeId.value;
 
       case 'node':
-        // skip non-FLiRS sleeping in list of associations/wakeup node notifications/... in CC params of type node
-        return (!ZigbeeAPIData.devices[dev].data.isListening.value && !ZigbeeAPIData.devices[dev].data.sensor250.value && !ZigbeeAPIData.devices[dev].data.sensor1000.value);
+        // skip sleeping in list of associations/wakeup node notifications/... in CC params of type node
+        return ZigbeeAPIData.devices[dev].data.isSleepy.value;
 
       default:
         return false;

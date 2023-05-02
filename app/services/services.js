@@ -171,26 +171,7 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
      * Get device type
      */
     this.deviceType = function (node) {
-        var type;
-        var isListening = node.data.isListening.value;
-        var isFLiRS = !isListening && (node.data.sensor250.value || node.data.sensor1000.value);
-        //var hasWakeup = 0x84 in node.endpoints[0].clusters;
-        var hasWakeup = !isListening && !node.data.sensor250.value && !node.data.sensor1000.value;
-
-        if (node.data.genericType.value === 1) {
-            type = 'portable';
-        } else if (node.data.genericType.value === 2) {
-            type = 'static';
-        } else if (isFLiRS) {
-            type = 'flirs';
-        } else if (hasWakeup) {
-            type = 'battery';
-        } else if (isListening) {
-            type = 'mains';
-        } else {
-            type = 'unknown';
-        }
-        return type;
+        return isSleepy ? 'battery' : 'mains';
     };
 
     /**
@@ -207,21 +188,6 @@ appService.service('deviceService', function ($filter, $log, $cookies, $window, 
      */
     this.isFailed = function (node) {
         return node.data.isFailed.value;
-    };
-
-    /**
-     * Check if device isListening
-     */
-    this.isListening = function (node) {
-        return node.data.isListening.value;
-    };
-
-    /**
-     * Check if device isFLiRS
-     */
-    this.isFLiRS = function (node) {
-        return  (node.data.sensor250.value || node.data.sensor1000.value);
-        // return !node.data.isListening.value && (node.data.sensor250.value || node.data.sensor1000.value);
     };
 
     /**

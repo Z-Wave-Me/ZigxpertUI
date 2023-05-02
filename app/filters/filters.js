@@ -679,9 +679,6 @@ angApp.filter('getDeviceTypeIcon', function () {
             case 'static':
                 icon = 'fa-cog';
                 break;
-            case 'flirs':
-                icon = 'fa-fire text-info';
-                break;
             case 'mains':
                 icon = 'fa-bolt text-warning';
                 break;
