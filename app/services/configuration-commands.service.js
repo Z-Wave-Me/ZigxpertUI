@@ -256,11 +256,18 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
 
   function renderMethodSpec(ccId, data) {
     switch (ccId) {
-
+      // Basic
+      case 0x0000:
+        return {
+          "ConfigurationGet": [],
+          "Reset": []
+        };
+      
       // OnOff
       case 0x0006:
         return {
           "Get": [],
+          "Toggle": [],
           "Set": [
             {
               "label": "Level",
@@ -285,9 +292,61 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                 ]
               }
             }
-          ]
+          ],
+          "SetOnTime": [
+            {
+              "label": "On time",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Off",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65535
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "SetOffWaitTime": [
+            {
+              "label": "Off wait time",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Off",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65535
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "ConfigurationGet": []
         };
-      
 
       // LevelControl
       case 0x0008:
@@ -353,6 +412,38 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           ]
         };
 
+      // Identify
+      case 0x0003:
+        return {
+          "IdentifyQuery": [],
+          "Identify": [
+            {
+              "label": "Identify time",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 65535
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "Get": []
+        };
+      
+      // IasZone
+      case 0x0500:
+        return {
+          "Get": [],
+          "ConfigurationGet": []
+        };
+      
       default:
         return {};
     }
