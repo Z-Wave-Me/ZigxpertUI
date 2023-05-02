@@ -781,7 +781,7 @@ angApp.filter('getRoutesCount', function ($filter) {
                     return; // skip deviced reported in routing table but absent in reality. This may happen after restore of routing table.
                 if (!in_array(nnodeId, exludeNodeIds)) {
                     nodesList.push({nodeId: nnodeId, hops: hops});
-                    if (ZigbeeAPIData.devices[nnodeId].data.isListening.value && ZigbeeAPIData.devices[nnodeId].data.isRouting.value)
+                    if (!ZigbeeAPIData.devices[nnodeId].data.isSleepy.value)
                         $.merge(nodesList, getFarNeighbours(nnodeId, $.merge([nnodeId], exludeNodeIds) /* this will not alter exludeNodeIds */, hops + 1));
                 }
             });

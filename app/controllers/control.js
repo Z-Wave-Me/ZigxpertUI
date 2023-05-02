@@ -271,7 +271,7 @@ appController.controller('ControlController', function ($scope, $interval, $time
                     $scope.controlDh.nodes.failedNodes.push(nodeId);
                 }
             }
-            if (!node.data.isListening.value && !node.data.isFailed.value) {
+            if (node.data.isSleepy.value && !node.data.isFailed.value) {
                 if ($scope.controlDh.nodes.failedBatteries.indexOf(nodeId) === -1) {
                     $scope.controlDh.nodes.failedBatteries.push(nodeId);
                 }
