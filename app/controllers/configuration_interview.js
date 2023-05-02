@@ -260,21 +260,17 @@ appController.controller('ConfigInterviewController', function ($scope, $routePa
     // Set device data
     var deviceImage = 'app/images/no_device_image.png';
     var deviceDescription = '';
-    var productName = node.endpoints[1]?.clusters[0]?.data.modelIdentifier.value || '';
+    var productName = node.endpoints[1]?.clusters[0]?.data.modelIdentifier?.value || '';
     var inclusionNote = '';
-    var brandName = node.endpoints[1]?.clusters[0]?.data.manufacturerName.value || '';
+    var brandName = node.endpoints[1]?.clusters[0]?.data.manufacturerName?.value || '';
     var wakeupNote = '';
     var ZigbeePlusRoles = [];
     var securityInterview = '';
-    var deviceDescriptionAppVersion = node.endpoints[1]?.clusters[0]?.data.applicationVersion.value.toString() || '';
+    var deviceDescriptionAppVersion = node.endpoints[1]?.clusters[0]?.data.applicationVersion?.value.toString() || '';
     var isSleepy = node.data.isSleepy.value;
     var manualUrl = "";
     var certNumber = "";
     var productCode = "";
-
-    // Security S2
-    var hasSecurityS2Cc = deviceService.hasCommandClass(node, 159);
-    var securityS2Key = deviceService.getS2GrantedKeys(hasSecurityS2Cc);
 
     var hasWakeup = isSleepy;
     var zbNodeName = '';
