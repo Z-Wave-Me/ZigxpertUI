@@ -589,31 +589,6 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
             }
           ]
         };
-
-      // Identify
-      case 0x0003:
-        return {
-          "IdentifyQuery": [],
-          "Identify": [
-            {
-              "label": "Identify time",
-              "type": {
-                "enumof": [
-                  {
-                    "label": "in seconds",
-                    "type": {
-                      "range": {
-                        "min": 0,
-                        "max": 65535
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ],
-          "Get": []
-        };
       
       // IasZone
       case 0x0500:
