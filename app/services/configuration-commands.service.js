@@ -600,6 +600,62 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
       // IasZone
       case 0x0500:
         return {
+          "InitiateNormalOperationMode": [],
+          "InitiateTestMode": [
+            {
+              "label": "Test Mode Duration in seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Current Zone Security Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": ( 
+                          function () {
+                            try {
+                              value  = data.numberOfZoneSensitivityLevelsSupported ? data.numberOfZoneSensitivityLevelsSupported : 0;
+                              return value;
+                            } catch (err) {
+                            }
+                            return 0;
+                          }
+                        )()
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "Enroll": [
+            {
+              "label": "Zone Identifier",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
           "Get": [],
           "ConfigurationGet": []
         };
