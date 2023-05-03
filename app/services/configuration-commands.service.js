@@ -529,10 +529,9 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
       // LevelControl
       case 0x0008:
         return {
-          "Get": [],
-          "MoveToLevelOnOff": [
+          "MoveToLevel": [
             {
-              "label": "Dimmer level",
+              "label": "Level",
               "type": {
                 "enumof": [
                   {
@@ -580,7 +579,15 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                     "type": {
                       "range": {
                         "min": 1,
-                        "max": 255
+                        "max": 65534
+                      }
+                    }
+                  },
+                  {
+                    "label": "immediately",
+                    "type": {
+                      "fix": {
+                        "value": 0
                       }
                     }
                   }
