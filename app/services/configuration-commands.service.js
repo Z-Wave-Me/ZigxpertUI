@@ -418,13 +418,13 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
               }
             }
           ],
-          "SetOnTime": [
+          "OffWaitTime": [
             {
-              "label": "On time",
+              "label": "Effect Identifier",
               "type": {
                 "enumof": [
                   {
-                    "label": "Off",
+                    "label": "Delayed All Off",
                     "type": {
                       "fix": {
                         "value": 0
@@ -432,44 +432,97 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                     }
                   },
                   {
-                    "label": "in seconds",
+                    "label": "Dying Light",
                     "type": {
-                      "range": {
-                        "min": 1,
-                        "max": 65535
+                      "fix": {
+                        "value": 1
                       }
                     }
                   }
                 ]
+              }
+            },
+            {
+              "label": "Effect Variable",
+              "type": {
+                "enumof": (
+                  function () {
+                    try {
+                      var arr  = [];
+                      var key = ;
+                    }
+                  }
+                )
+              }
+            }
+          ],
+          "RecallGlobalScene": [],
+          "OnWithTimedOff": [
+            {
+              "label": "Control",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Accept Only When On",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Decline",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "On time in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
+              }
+            },
+            {
+              "label": "Off wait time in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
+              }
+            }
+          ],
+          "SetOnTime": [
+            {
+              "label": "in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
               }
             }
           ],
           "SetOffWaitTime": [
             {
-              "label": "Off wait time",
+              "label": "in 1/10 seconds",
               "type": {
-                "enumof": [
-                  {
-                    "label": "Off",
-                    "type": {
-                      "fix": {
-                        "value": 0
-                      }
-                    }
-                  },
-                  {
-                    "label": "in seconds",
-                    "type": {
-                      "range": {
-                        "min": 1,
-                        "max": 65535
-                      }
-                    }
-                  }
-                ]
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
               }
             }
           ],
+          "Get": [],
           "ConfigurationGet": []
         };
 
