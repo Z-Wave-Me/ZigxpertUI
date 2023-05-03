@@ -262,6 +262,131 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           "ConfigurationGet": [],
           "Reset": []
         };
+
+      // Identify
+      case 0x0003:
+        return {
+          "Identify": [
+            {
+              "label": "Identify",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Start",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label" : "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65535
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "IdentifyQuery": [],
+          "TriggerEffect": [
+            {
+              "label": "Effect Identifyer",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Blink",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Breathe",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "Okay",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      }
+                    }
+                  },
+                  {
+                    "label": "Channel change",
+                    "type": {
+                      "fix": {
+                        "value": 11
+                      }
+                    }
+                  },
+                  {
+                    "label": "Finish effect",
+                    "type": {
+                      "fix": {
+                        "value": 254
+                      }
+                    }
+                  },
+                  {
+                    "label": "Stop effect",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Effect Variant",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "variable",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "SetIdentifyTime": [
+            {
+              "label": "Identify Time",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65535
+                }
+              }
+            }
+          ],
+          "Get": []
+        };
       
       // OnOff
       case 0x0006:
