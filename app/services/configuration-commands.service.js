@@ -445,14 +445,40 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
             {
               "label": "Effect Variable",
               "type": {
-                "enumof": (
-                  function () {
-                    try {
-                      var arr  = [];
-                      var key = ;
+                "enumof": [
+                  {
+                    "label": "Fade to off in 0.8 seconds",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
                     }
-                  }
-                )
+                  },
+                  {
+                    "label": "No Fade",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "50% dim down in 0.8 seconds then fade to off in 12 seconds",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      }
+                    }
+                  },
+                  {
+                    "label": "20% dim up in 0.5s then fade to off in 1 second",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  } 
+                ]
               }
             }
           ],
