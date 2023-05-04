@@ -1780,7 +1780,7 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                         "max": ( 
                           function () {
                             try {
-                              value  = data.numberOfZoneSensitivityLevelsSupported ? data.numberOfZoneSensitivityLevelsSupported : 0;
+                              value  = data.numberOfZoneSensitivityLevelsSupported ? data.numberOfZoneSensitivityLevelsSupported.value : 0;
                               return value;
                             } catch (err) {
                             }
