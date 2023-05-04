@@ -859,6 +859,24 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           "ConfigurationGet": []
         };
       
+      // PollControl
+      case 0x0020:
+        return {
+          "FastPollStop": [],
+          "SetLongPollInterval": [
+            {
+              "label": "Long Poll Interval",
+              "type": {
+                "range": {
+                  "min": 4,
+                  "max": 7208960
+                }
+              }
+            }
+          ],
+          "ConfigurationGet": []
+        };
+
       // IasZone
       case 0x0500:
         return {
