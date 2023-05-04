@@ -1678,6 +1678,74 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           "GetRemainingTime": []
         };
 
+      // DoorLock
+      case 0x0101:
+        return {
+          "DoorLock": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "DoorUnlock": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "Toggle": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "UnlockWithTimeout": [
+            {
+              "label": "Timeout in seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "GetLogRecord": [
+            {
+              "label": "Log Index",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": ( 
+                    function () {
+                      try {
+                        value  = data.numberOfLogRecordsSupported ? data.numberOfLogRecordsSupported.value - 1 : 0;
+                        return value;
+                      } catch (err) {
+                      }
+                      return 0;
+                    }
+                  )()
+                }
+              }
+            }
+          ],
+          "GetState": [],
+          "ConfigurationGet": []
+        };
+
       // IasZone
       case 0x0500:
         return {
