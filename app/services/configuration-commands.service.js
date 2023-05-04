@@ -594,7 +594,243 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                 ]
               }
             }
-          ]
+          ],
+          "Move": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "in units per second",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 254
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "Step": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Step Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "Stop": [],
+          "MoveToLevelOnOff": [
+            {
+              "label": "Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Off",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "Full",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "immediately",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65534
+                      }
+                    }
+                  },
+                  {
+                    "label": "immediately",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "MoveOnOff": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "in units per second",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 254
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "StepOnOff": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Step Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "StopOnOff": [],
+          "Get": [],
+          "ConfigurationGet": []
         };
       
       // IasZone
