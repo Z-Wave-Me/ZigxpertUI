@@ -262,6 +262,131 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           "ConfigurationGet": [],
           "Reset": []
         };
+
+      // Identify
+      case 0x0003:
+        return {
+          "Identify": [
+            {
+              "label": "Identify",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Start",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label" : "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65535
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "IdentifyQuery": [],
+          "TriggerEffect": [
+            {
+              "label": "Effect Identifyer",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Blink",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Breathe",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "Okay",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      }
+                    }
+                  },
+                  {
+                    "label": "Channel change",
+                    "type": {
+                      "fix": {
+                        "value": 11
+                      }
+                    }
+                  },
+                  {
+                    "label": "Finish effect",
+                    "type": {
+                      "fix": {
+                        "value": 254
+                      }
+                    }
+                  },
+                  {
+                    "label": "Stop effect",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Effect Variant",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "variable",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "SetIdentifyTime": [
+            {
+              "label": "Identify Time",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65535
+                }
+              }
+            }
+          ],
+          "Get": []
+        };
       
       // OnOff
       case 0x0006:
@@ -293,13 +418,13 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
               }
             }
           ],
-          "SetOnTime": [
+          "OffWaitTime": [
             {
-              "label": "On time",
+              "label": "Effect Identifier",
               "type": {
                 "enumof": [
                   {
-                    "label": "Off",
+                    "label": "Delayed All Off",
                     "type": {
                       "fix": {
                         "value": 0
@@ -307,54 +432,132 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                     }
                   },
                   {
-                    "label": "in seconds",
+                    "label": "Dying Light",
                     "type": {
-                      "range": {
-                        "min": 1,
-                        "max": 65535
+                      "fix": {
+                        "value": 1
                       }
                     }
                   }
                 ]
+              }
+            },
+            {
+              "label": "Effect Variable",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Fade to off in 0.8 seconds",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "No Fade",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "50% dim down in 0.8 seconds then fade to off in 12 seconds",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      }
+                    }
+                  },
+                  {
+                    "label": "20% dim up in 0.5s then fade to off in 1 second",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  } 
+                ]
+              }
+            }
+          ],
+          "RecallGlobalScene": [],
+          "OnWithTimedOff": [
+            {
+              "label": "Control",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Accept Only When On",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Decline",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "On time in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
+              }
+            },
+            {
+              "label": "Off wait time in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
+              }
+            }
+          ],
+          "SetOnTime": [
+            {
+              "label": "in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
               }
             }
           ],
           "SetOffWaitTime": [
             {
-              "label": "Off wait time",
+              "label": "in 1/10 seconds",
               "type": {
-                "enumof": [
-                  {
-                    "label": "Off",
-                    "type": {
-                      "fix": {
-                        "value": 0
-                      }
-                    }
-                  },
-                  {
-                    "label": "in seconds",
-                    "type": {
-                      "range": {
-                        "min": 1,
-                        "max": 65535
-                      }
-                    }
-                  }
-                ]
+                "range": {
+                  "min": 0,
+                  "max": 65534
+                }
               }
             }
           ],
+          "Get": [],
           "ConfigurationGet": []
         };
 
       // LevelControl
       case 0x0008:
         return {
-          "Get": [],
-          "MoveToLevelOnOff": [
+          "MoveToLevel": [
             {
-              "label": "Dimmer level",
+              "label": "Level",
               "type": {
                 "enumof": [
                   {
@@ -402,31 +605,15 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
                     "type": {
                       "range": {
                         "min": 1,
-                        "max": 255
+                        "max": 65534
                       }
                     }
-                  }
-                ]
-              }
-            }
-          ]
-        };
-
-      // Identify
-      case 0x0003:
-        return {
-          "IdentifyQuery": [],
-          "Identify": [
-            {
-              "label": "Identify time",
-              "type": {
-                "enumof": [
+                  },
                   {
-                    "label": "in seconds",
+                    "label": "immediately",
                     "type": {
-                      "range": {
-                        "min": 0,
-                        "max": 65535
+                      "fix": {
+                        "value": 0
                       }
                     }
                   }
@@ -434,12 +621,1190 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
               }
             }
           ],
-          "Get": []
+          "Move": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "in units per second",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 254
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "Step": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Step Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "Stop": [],
+          "MoveToLevelOnOff": [
+            {
+              "label": "Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Off",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "Full",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "immediately",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "in seconds",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 65534
+                      }
+                    }
+                  },
+                  {
+                    "label": "immediately",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "MoveOnOff": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 255
+                      }
+                    }
+                  },
+                  {
+                    "label": "in units per second",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 254
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "StepOnOff": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Step Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "StopOnOff": [],
+          "Get": [],
+          "ConfigurationGet": []
         };
       
+      // PollControl
+      case 0x0020:
+        return {
+          "FastPollStop": [],
+          "SetLongPollInterval": [
+            {
+              "label": "Long Poll Interval",
+              "type": {
+                "range": {
+                  "min": 4,
+                  "max": 7208960
+                }
+              }
+            }
+          ],
+          "ConfigurationGet": []
+        };
+
+      // ColorControl
+      case 0x0300:
+        return {
+          "MoveToHue": [
+            {
+              "label": "Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Direction",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Shortest distance",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Longest distance",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveHue": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Stop",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "range": {
+                  "min": 1,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "StepHue": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Steps Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveToSaturation": [
+            {
+              "label": "Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveSaturation": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Stop",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "steps per second",
+              "type": {
+                "range": {
+                  "min": 1,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "StepSaturation": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Steps Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10 seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
+          "MoveToHueAndSaturation": [
+            {
+              "label": "Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Saturation",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveToColor": [
+            {
+              "label": "ColorX",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "ColorY",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveColor": [
+            {
+              "label": "RateX",
+              "type": {
+                "range": {
+                  "min":  -(256*256) / 2 + 1,
+                  "max": (256*256) / 2 - 1
+                }
+              }
+            },
+            {
+              "label": "RateY",
+              "type": {
+                "range": {
+                  "min":  -(256*256) / 2 + 1,
+                  "max": (256*256) / 2 - 1
+                }
+              }
+            }
+          ],
+          "StepColor": [
+            {
+              "label": "RateX",
+              "type": {
+                "range": {
+                  "min":  -(256*256) / 2 + 1,
+                  "max": (256*256) / 2 - 1
+                }
+              }
+            },
+            {
+              "label": "RateY",
+              "type": {
+                "range": {
+                  "min":  -(256*256) / 2 + 1,
+                  "max": (256*256) / 2 - 1
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "MoveToColorTemperature": [
+            {
+              "label": "ColorTemperatureMireds",
+              "type": {
+                "range": {
+                  "min":  0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "EnhancedMoveToHue": [
+            {
+              "label": "Enhanced Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Direction",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Shortest distance",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Longest distance",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "EnhancedMoveHue": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Stop",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "range": {
+                  "min": 1,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "EnhancedStepHue": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Steps Size",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "EnhancedMoveToHueAndSaturation": [
+            {
+              "label": "Enhanced Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Saturation",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "ColorLoopSet": [
+            {
+              "label": "UpdateFlags",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Update Action",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "Update Direction",
+                    "type": {
+                      "fix": {
+                        "value": 2
+                      }
+                    }
+                  },
+                  {
+                    "label": "Update Time",
+                    "type": {
+                      "fix": {
+                        "value": 4
+                      }
+                    }
+                  },
+                  {
+                    "label": "Update Start Hue",
+                    "type": {
+                      "fix": {
+                        "value": 8
+                      }
+                    }
+                  },
+                  {
+                    "label": "Flags",
+                    "type": {
+                      "range": {
+                        "min": 1,
+                        "max": 15
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "De-activate the color loop",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Activate the color loop from the value in the ColorLoopStartEnhancedHue field",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "Activate the color loop from the value of the EnhancedCurrentHue attribute",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Direction",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Decrement",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Increment",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time in seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Start Hue",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "StopMoveStep": [],
+          "MoveColorTemperature": [
+            {
+              "label": "Move Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Stop",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": {
+                "range": {
+                  "min": 1,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Color Temperature Minimum Mireds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Color Temperature Maximum Mireds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "StepColorTemperature": [
+            {
+              "label": "Step Mode",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Up",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      } 
+                    }
+                  },
+                  {
+                    "label": "Down",
+                    "type": {
+                      "fix": {
+                        "value": 3
+                      } 
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Step Size",
+              "type": {
+                "range": {
+                  "min": 1,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Transition Time in 1/10th of second",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Color Temperature Minimum Mireds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Color Temperature Maximum Mireds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "GetHueSaturation": [],
+          "GetColor": [],
+          "GetRemainingTime": []
+        };
+
+      // DoorLock
+      case 0x0101:
+        return {
+          "DoorLock": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "DoorUnlock": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "Toggle": [
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "UnlockWithTimeout": [
+            {
+              "label": "Timeout in seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "PIN Code",
+              "type": {
+                "string": {}
+              }
+            }
+          ],
+          "GetLogRecord": [
+            {
+              "label": "Log Index",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": ( 
+                    function () {
+                      try {
+                        value  = data.numberOfLogRecordsSupported ? data.numberOfLogRecordsSupported.value - 1 : 0;
+                        return value;
+                      } catch (err) {
+                      }
+                      return 0;
+                    }
+                  )()
+                }
+              }
+            }
+          ],
+          "GetState": [],
+          "ConfigurationGet": []
+        };
+
       // IasZone
       case 0x0500:
         return {
+          "InitiateNormalOperationMode": [],
+          "InitiateTestMode": [
+            {
+              "label": "Test Mode Duration in seconds",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            },
+            {
+              "label": "Current Zone Security Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Default",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": ( 
+                          function () {
+                            try {
+                              value  = data.numberOfZoneSensitivityLevelsSupported ? data.numberOfZoneSensitivityLevelsSupported.value : 0;
+                              return value;
+                            } catch (err) {
+                            }
+                            return 0;
+                          }
+                        )()
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "Enroll": [
+            {
+              "label": "Zone Identifier",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 255
+                }
+              }
+            }
+          ],
           "Get": [],
           "ConfigurationGet": []
         };
