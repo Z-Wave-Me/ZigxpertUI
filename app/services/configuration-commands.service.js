@@ -30,6 +30,9 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
       ColorControl: {
         values: ['currentHue', 'currentSaturation', 'remainingTime', 'colorMode']
       },
+      OccupancySensing: {
+        values: ['occupancy', 'occupancySensorType', 'pirOccupiedToUnoccupiedDelay', 'pirUnoccupiedToOccupiedDelay', 'pirOccupiedToUnoccupiedThreshold', 'ultrasonicOccupiedToUnoccupiedDelay', 'ultrasonicUnoccupiedToOccupiedDelay', 'ultrasonicOccupiedToUnoccupiedThreshold'],
+      },
       IasZone: {
         values: ['zoneState', 'zoneType', 'zoneStatus', 'zoneId', 'CurrentZoneSensitivityLevel'],
       },
@@ -1744,6 +1747,88 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           ],
           "GetState": [],
           "ConfigurationGet": []
+        };
+
+      // OccupancySensing
+      case 0x0406:
+        return {
+          "SetOccupancyReporting": [
+            {
+              "label": "Configure Reporting",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Left to Right",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Right to Left",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Minimum Interval",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Maximum Interval",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            },
+            {
+              "label": "Timeout",
+              "type": {
+                "range": {
+                  "min": 0,
+                  "max": 256*256 - 1
+                }
+              }
+            }
+          ],
+          "ResetOccupancyReporting": [
+            {
+              "label": "Configure Reporting",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Left to Right",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Right to Left",
+                    "type": {
+                      "fix": {
+                        "value": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         };
 
       // IasZone
