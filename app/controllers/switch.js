@@ -127,7 +127,7 @@ appController.controller('SwitchController', function ($scope, $filter, $timeout
     $scope.sliderOnHandleUp = function (cmd, index) {
         $scope.refreshZigbeeData(null);
         var val = $scope.switches.rangeSlider[index];
-        var url = cmd + '(' + val + ')';
+        var url = cmd + '(' + parseInt(val*255/100) + ')';
         dataService.runZigbeeCmd(cfg.store_url + url).then(function (response) {
             $scope.toggleRowSpinner();
         }, function (error) {
@@ -273,7 +273,7 @@ appController.controller('SwitchController', function ($scope, $filter, $timeout
         var level_color;
         var level_status = 'off';
         var level_val = 0;
-        var level_max = 255;
+        var level_max = 100;
 
         //var level = obj.value;
         var level = (angular.isDefined(obj.value) ? obj.value : null);
@@ -296,9 +296,10 @@ appController.controller('SwitchController', function ($scope, $filter, $timeout
                 level_color = '#3c763d';
                 level_val = level;
             } else {
+                level = Math.round(level * 100 / 255)
                 level_cont = level.toString() + ((ccId == 0x0008) ? '%' : '');
-                var lvlc_r = ('00' + parseInt(0x9F + 0x60 * level / 99).toString(16)).slice(-2);
-                var lvlc_g = ('00' + parseInt(0x7F + 0x50 * level / 99).toString(16)).slice(-2);
+                var lvlc_r = ('00' + parseInt(0x9F + 0x60 * level / 100).toString(16)).slice(-2);
+                var lvlc_g = ('00' + parseInt(0x7F + 0x50 * level / 100).toString(16)).slice(-2);
                 level_color = '#' + lvlc_r + lvlc_g + '00';
                 level_status = 'on';
                 level_val = level;
