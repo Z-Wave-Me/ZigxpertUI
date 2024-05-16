@@ -43,14 +43,14 @@ appController.controller('ControlController', function ($scope, $interval, $time
 
         },
         input: {
-            failedNodes: 0,
-            replaceNodes: 0,
+            failedNode: 0,
+            removeNode: 0,
             failedBatteries: 0,
             sucSis: 0
         },
         removed: {
             failedNodes: [],
-            replaceNodes: [],
+            removedNodes: [],
             failedBatteries: []
         },
         factory: {
@@ -263,8 +263,8 @@ appController.controller('ControlController', function ($scope, $interval, $time
                 return;
             }
             // Devices
-            if (!$scope.controlDh.nodes.all[nodeId]) {
-                $scope.controlDh.nodes.all[nodeId] = $filter('deviceName')(nodeId, node);
+            if ($scope.controlDh.nodes.all.indexOf(nodeId) === -1) {
+                $scope.controlDh.nodes.all.push(nodeId);
             }
             if (node.data.isFailed.value) {
                 if ($scope.controlDh.nodes.failedNodes.indexOf(nodeId) === -1) {
@@ -634,21 +634,21 @@ appController.controller('RemoveFailedNodeController', function ($scope, $timeou
 });
 
 /**
- * The controller replaces a failed node by a new node.
- * @class ReplaceFailedNodeController
+ * The controller remove a node
+ * @class RemoveNodeController
  *
  */
-appController.controller('ReplaceFailedNodeController', function ($scope, $timeout) {
+appController.controller('RemoveNodeController', function ($scope, $timeout) {
     /**
-     * Replace failed node with a new one.
-     * nodeId=x Node Id to be replaced by new one
+     * Remove node
+     * nodeId=x Node Id to be removed
      * @param {string} cmd
      */
-    $scope.replaceFailedNode = function (cmd) {
+    $scope.removeNode = function (cmd) {
         $scope.runZigbeeCmd(cmd);
         $timeout(function () {
-            $scope.controlDh.removed.replaceNodes.push($scope.controlDh.input.replaceNodes);
-            $scope.controlDh.input.replaceNodes = 0;
+            $scope.controlDh.removed.removedNodes.push($scope.controlDh.input.removeNode);
+            $scope.controlDh.input.removeNode = 0;
         }, 1000);
     };
 });
