@@ -39,14 +39,14 @@ appController.controller('ControlController', function ($scope, $interval, $time
             all: [],
             failedNodes: [],
             failedBatteries: [],
-            sucSis: []
+            //sucSis: []
 
         },
         input: {
             failedNode: 0,
             removeNode: 0,
             failedBatteries: 0,
-            sucSis: 0
+            //sucSis: 0
         },
         removed: {
             failedNodes: [],
