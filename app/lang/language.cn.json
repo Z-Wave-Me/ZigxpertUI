@@ -667,7 +667,7 @@
     "th_battery_count": "N电池数量",
     "th_battery_type": "电池类型",
     "th_buffer": "缓冲区",
-    "th_command_class": "命令类",
+    "th_cluster": "命令类",
     "th_command_param": "命令\/参数",
     "th_ddr": "DDR",
     "th_ddr_tip": "设备描述记录",

@@ -15,7 +15,7 @@
             <div ng-if="!errorOnLoad">
                 <div class="panel-heading command">
                     <div>{{_t('th_endpoint')}}</div>
-                    <div>{{_t('th_command_class')}}</div>
+                    <div>{{_t('th_cluster')}}</div>
                 </div>
                 <div ng-repeat="command in commandsUpdated track by $index" class="panel panel-command"
                      ng-init="expanded[$index] = false">
@@ -26,7 +26,7 @@
                                 ng-click="handleCmdClassModal('cmdClassModal', $event, command.endpoint, command.ccId, 'endpoint')">
                             <span>{{command.endpoint}}</span>
                         </button>
-                        <button class="btn btn-default command-button" title="{{_t('th_command_class')}}"
+                        <button class="btn btn-default command-button" title="{{_t('th_cluster')}}"
                                 ng-click="handleCmdClassModal('cmdClassModal', $event, command.endpoint, command.ccId, 'cluster')">
                             <span>{{command.name}}</span>
                         </button>

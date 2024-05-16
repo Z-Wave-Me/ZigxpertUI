@@ -669,7 +669,7 @@
     "th_battery_count": "Количество батареек",
     "th_battery_type": "Тип батареек",
     "th_buffer": "Буфер",
-    "th_command_class": "Класс Команд",
+    "th_cluster": "Кластер",
     "th_command_param": "Команда \/ Параметр",
     "th_ddr": "ZDDX",
     "th_ddr_tip": "Файл описания устройства",
