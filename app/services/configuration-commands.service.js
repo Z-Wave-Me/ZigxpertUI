@@ -42,6 +42,9 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
       DoorLock: {
         values: ['lockState', 'lockType', 'actuatorEnabled', 'doorState', 'doorOpenEvents', 'doorClosedEvents', 'openPeriod', 'enableLogging', 'ledSettings', 'autoRelockTime', 'soundVolume', 'operatingMode', 'enableOneTouchLocking', 'enableInsideStatusLED', 'enablePrivacyModeButton', 'wrongCodeEntryLimit', 'userCodeTemporaryDisableTime', 'sendPINOverTheAir', 'requirePINforRFOperation', 'zigBeeSecurityLevel', 'alarmMask', 'keypadOperationEventMask', 'rfOperationEventMask', 'manualOperationEventMask', 'rfidOperationEventMask', 'keypadProgrammingEventMask', 'rfProgrammingEventMask', 'rfidProgrammingEventMask']
       },
+      WindowCovering: {
+        values: ['currentPositionLiftPercentage', 'currentPositionTiltPercentage', 'mode', 'windowCoveringType', 'configStatus']
+      },
       Alarm: {
         arrays: ['alarmTable', 'alarmCode', 'clusterId', 'timeStamp']
       }
@@ -1749,6 +1752,82 @@ configurationCommandsModule.service('configurationCommandsService', ['dataHolder
           "ConfigurationGet": []
         };
 
+      // LevelControl
+      case 0x0102:
+        return {
+          "GoToLiftPercentage": [
+            {
+              "label": "Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Closed",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 100
+                      }
+                    }
+                  },
+                  {
+                    "label": "Open",
+                    "type": {
+                      "fix": {
+                        "value": 100
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "GoToTiltPercentage": [
+            {
+              "label": "Level",
+              "type": {
+                "enumof": [
+                  {
+                    "label": "Closed",
+                    "type": {
+                      "fix": {
+                        "value": 0
+                      }
+                    }
+                  },
+                  {
+                    "label": "Level",
+                    "type": {
+                      "range": {
+                        "min": 0,
+                        "max": 100
+                      }
+                    }
+                  },
+                  {
+                    "label": "Open",
+                    "type": {
+                      "fix": {
+                        "value": 100
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "UpOpen": [],
+          "DownClose": [],
+          "Stop": [],
+        };
+      
       // OccupancySensing
       case 0x0406:
         return {
