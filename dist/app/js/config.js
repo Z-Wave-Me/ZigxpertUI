@@ -9,7 +9,7 @@ var config_data = {
 		'dev_host': [],
 		'app_name': 'Z-Wave Expert',
 		'app_version': 'v1.0.3',
-		'app_built': '22-04-2024 23:47:16',
+		'app_built': '17-06-2024 05:12:37',
 		'app_id': 'ExpertUI',
 		'custom_ip': false,
 		'user_field': 'USERXXXX',
@@ -89,8 +89,8 @@ var config_data = {
 		//'reorg_log_url': '/config/reorg.log', // Url for store reorg log data
 		'zddx_url': '/ZDDX/', // Url for zddx xml files
 		'notes_url': '/config/notes.log', // Url for store notes data
-		'firmwares_url': 'https://service.z-wave.me/zw-firmwares', // Url for Zigbee.Me firmware database
-		'firmwares_storage_url': 'https://service.z-wave.me/zw-firmwares/storage/', // Url for Zigbee.Me firmware storage
+		'firmwares_url': 'https://service.z-wave.me/zw-firmwares', // Url for Z-Wave.Me firmware database
+		'firmwares_storage_url': 'https://service.z-wave.me/zw-firmwares/storage/', // Url for Z-Wave.Me firmware storage
 		'uzb_url': 'https://service.z-wave.me/expertui/uzb/', // Url for uzb data
 		'get_licence_scratchid': 'https://service.z-wave.me/license/index.php', // Get licence scratch id
 		'license_url': 'https://service.z-wave.me/licence/upgrade.php', // Url for license key
