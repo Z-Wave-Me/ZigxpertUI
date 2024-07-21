@@ -3,6 +3,13 @@ Zigbee Expert UI for Z-Way controller
 
 This User Interfaces allows to operate a Smart Home Network based on Zigbee devices. It utilizes the software architecture Z-Way.
 
+## v1.0.4
+#### New features:
+- Window Covering Expert commands
+- Added Remove Node
+#### Fixes:
+- Fixed slider max in LevelControl
+
 ## v1.0.3
 #### Fixes:
 - Update Cluster OccupancySensing
