@@ -89,8 +89,8 @@ var config_data = {
 		//'reorg_log_url': '/config/reorg.log', // Url for store reorg log data
 		'zddx_url': '/ZDDX/', // Url for zddx xml files
 		'notes_url': '/config/notes.log', // Url for store notes data
-		'firmwares_url': 'https://service.z-wave.me/zw-firmwares', // Url for Z-Wave.Me firmware database
-		'firmwares_storage_url': 'https://service.z-wave.me/zw-firmwares/storage/', // Url for Z-Wave.Me firmware storage
+		'firmwares_url': 'https://service.z-wave.me/zw-firmwares', // Url for Trident IoT firmware database
+		'firmwares_storage_url': 'https://service.z-wave.me/zw-firmwares/storage/', // Url for Trident IoT firmware storage
 		'uzb_url': 'https://service.z-wave.me/expertui/uzb/', // Url for uzb data
 		'get_licence_scratchid': 'https://service.z-wave.me/license/index.php', // Get licence scratch id
 		'license_url': 'https://service.z-wave.me/licence/upgrade.php', // Url for license key
@@ -307,7 +307,7 @@ var config_data = {
 		},
 		// List of the find hosts
 		'find_hosts': [
-			'find.z-wave.me'
+			'find.tridentiot.com'
 		],
 		// Redirect to the url after logout
 		'logout_redirect': {
@@ -321,41 +321,41 @@ var config_data = {
 		'custom_cfg': {
 			'default': {
 				'logo': 'app/images/zigbee.png',
-				'footer_text': '&COPY; 2023 by Z-Wave.Me',
+				'footer_text': '&COPY; 2025 by Trident IoT',
 				'logout': '/smarthome/#/logout',
 				'version_type': '',
 				'title': 'Zigbee Expert UI',
 				'controller_name': 'Z-Way',
-				'hardware_vendor': 'RaZberry by Z-Wave.Me',
+				'hardware_vendor': 'RaZberry by Trident IoT',
 				'latest_version_url': 'https://storage.z-wave.me/z-way/razberry/latest/VERSION'
 			},
 			'wd': {
 				'logo': 'app/images/zigbee.png',
-				'footer_text': '&COPY; 2023 by Z-Wave.Me',
+				'footer_text': '&COPY; 2025 by Trident IoT',
 				'logout': '/smarthome/#/logout',
 				'version_type': '',
 				'title': 'Zigbee Expert UI',
 				'controller_name': 'Z-Way',
-				'hardware_vendor': 'RaZberry by Z-Wave.Me'
+				'hardware_vendor': 'RaZberry by Trident IoT'
 			},
 			'popp': {
 				'logo': 'app/images/zigbee.png',
-				'footer_text': '&COPY; 2023 by Z-Wave.Me',
+				'footer_text': '&COPY; 2025 by Trident IoT',
 				'logout': '/smarthome/#/logout',
 				'version_type': '',
 				'title': 'Zigbee Expert UI',
 				'controller_name': 'Z-Way',
-				'hardware_vendor': 'RaZberry by Z-Wave.Me',
+				'hardware_vendor': 'RaZberry by Trident IoT',
 				'latest_version_url': 'https://storage.z-wave.me/z-way/popp_rpi/latest/VERSION'
 			},
 			'jb': {
 				'logo': 'app/images/zigbee.png',
-				'footer_text': '&COPY; 2023 by Z-Wave.Me',
+				'footer_text': '&COPY; 2025 by Trident IoT',
 				'logout': '/smarthome/#/logout',
 				'version_type': '',
 				'title': 'Zigbee Expert UI',
 				'controller_name': 'Z-Way',
-				'hardware_vendor': 'RaZberry by Z-Wave.Me',
+				'hardware_vendor': 'RaZberry by Trident IoT',
 				'latest_version_url': 'https://storage.z-wave.me/z-way/poppbox/latest/VERSION'
 			}
 		}

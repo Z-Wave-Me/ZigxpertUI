@@ -226,7 +226,7 @@
     "firmware_update_remote": "Обновления прошивки не могут быть сделаны при удаленном подключении.",
     "firmware_uptodate": "Текущая прошивка актуальна",
     "firmware_url": "URL прошивки",
-    "footer_text": "&COPY; 2020 Z-Wave.Me",
+    "footer_text": "&COPY; 2020 Trident IoT",
     "foreignframes": "Внешний",
     "foreign_frames_desc": "Внешние рамки",
     "forward_login": "Автоматический вход при локальном доступе",

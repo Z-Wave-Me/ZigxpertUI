@@ -226,7 +226,7 @@
     "firmware_update_remote": "Firmware updates cannot be done when connected remotely.",
     "firmware_uptodate": "Your current firmware is up to date",
     "firmware_url": "Firmware URL",
-    "footer_text": "& COPY; 2020 by Z-Wave.Me",
+    "footer_text": "& COPY; 2020 by Trident IoT",
     "foreignframes": "Foreign",
     "foreign_frames_desc": "Foreign Frames",
     "forward_login": "Automatic login on local access",
