@@ -307,7 +307,7 @@ var config_data = {
 		},
 		// List of the find hosts
 		'find_hosts': [
-			'find.z-wave.me'
+			'find.tridentiot.com'
 		],
 		// Redirect to the url after logout
 		'logout_redirect': {
